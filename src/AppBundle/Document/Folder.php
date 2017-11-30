@@ -43,7 +43,7 @@ class Folder
      * @var User $user 
      * @ODM\ReferenceOne(targetDocument="User")
      */
-    protected $createBy;
+    protected $createdBy;
     
     /** 
      * @var \DateTime createdAt
@@ -196,25 +196,25 @@ class Folder
     }
 
     /**
-     * Set createBy
+     * Set createdBy
      *
-     * @param User $createBy
+     * @param User $createdBy
      * @return $this
      */
-    public function setCreateBy(User $createBy)
+    public function setCreatedBy(User $createdBy)
     {
-        $this->createBy = $createBy;
+        $this->createdBy = $createdBy;
         return $this;
     }
 
     /**
-     * Get createBy
+     * Get createdBy
      *
-     * @return User $createBy
+     * @return User $createdBy
      */
-    public function getCreateBy()
+    public function getCreatedBy()
     {
-        return $this->createBy;
+        return $this->createdBy;
     }
 
     /**

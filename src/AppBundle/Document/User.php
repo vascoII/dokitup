@@ -56,7 +56,7 @@ class User
     protected $userRole;
     
     /**
-     * @ODM\ReferenceMany(targetDocument="Company", cascade="all")
+     * @ODM\ReferenceMany(targetDocument="Company")
      */
     protected $companies;
     

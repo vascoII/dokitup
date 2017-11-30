@@ -41,7 +41,12 @@ class Company
      * @ODM\Field(name="attributes", type="collection")
      */
     protected $attributes;
-    
+
+    /**
+     * @ODM\ReferenceMany(targetDocument="User", mappedBy="companies")
+     */
+    protected $users;
+
     /**
      * @ODM\ReferenceMany(targetDocument="Folder", mappedBy="companies")
      */
@@ -51,7 +56,7 @@ class Company
      * @var User $user 
      * @ODM\ReferenceOne(targetDocument="User")
      */
-    protected $createBy;
+    protected $createdBy;
     
     /** 
      * @var \DateTime createdAt
@@ -63,22 +68,25 @@ class Company
      * @var User $user
      * @ODM\ReferenceOne(targetDocument="User")
      */
-    protected $updateBy;
+    protected $updatedBy;
     
     /** 
      * @var \DateTime updateAt
      * @ODM\Field(type="date", nullable=true) 
      */
-    protected $updateAt;
+    protected $updatedAt;
 
     
     public function __construct() 
     {
+        $this->users = new ArrayCollection();
         $this->folders = new ArrayCollection();
         $this->attributes = new ArrayCollection();
         $this->createdAt = new \DateTime();
-        $this->updateAt = null;
+        $this->updatedAt = null;
     }
+
+    
 
     /**
      * Get id
@@ -159,7 +167,7 @@ class Company
     /**
      * Set attributes
      *
-     * @param Collection $attributes
+     * @param collection $attributes
      * @return $this
      */
     public function setAttributes($attributes)
@@ -171,11 +179,43 @@ class Company
     /**
      * Get attributes
      *
-     * @return Collection $attributes
+     * @return collection $attributes
      */
     public function getAttributes()
     {
         return $this->attributes;
+    }
+
+    /**
+     * Add user
+     *
+     * @param User $user
+     */
+    public function addUser(User $user)
+    {
+        $this->users[] = $user;
+        $user->addCompany($this);
+    }
+
+    /**
+     * Remove user
+     *
+     * @param User $user
+     */
+    public function removeUser(User $user)
+    {
+        $this->users->removeElement($user);
+        $user->removeCompany($this);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection $users
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 
     /**
@@ -209,25 +249,25 @@ class Company
     }
 
     /**
-     * Set createBy
+     * Set createdBy
      *
-     * @param User $createBy
+     * @param User $createdBy
      * @return $this
      */
-    public function setCreateBy(User $createBy)
+    public function setCreatedBy(User $createdBy)
     {
-        $this->createBy = $createBy;
+        $this->createdBy = $createdBy;
         return $this;
     }
 
     /**
-     * Get createBy
+     * Get createdBy
      *
-     * @return User $createBy
+     * @return User $createdBy
      */
-    public function getCreateBy()
+    public function getCreatedBy()
     {
-        return $this->createBy;
+        return $this->createdBy;
     }
 
     /**
@@ -253,46 +293,46 @@ class Company
     }
 
     /**
-     * Set updateBy
+     * Set updatedBy
      *
-     * @param User $updateBy
+     * @param User $updatedBy
      * @return $this
      */
-    public function setUpdateBy(User $updateBy)
+    public function setUpdatedBy(User $updatedBy)
     {
-        $this->updateBy = $updateBy;
+        $this->updatedBy = $updatedBy;
         return $this;
     }
 
     /**
-     * Get updateBy
+     * Get updatedBy
      *
-     * @return User $updateBy
+     * @return User $updatedBy
      */
-    public function getUpdateBy()
+    public function getUpdatedBy()
     {
-        return $this->updateBy;
+        return $this->updatedBy;
     }
 
     /**
-     * Set updateAt
+     * Set updatedAt
      *
-     * @param \DateTime $updateAt
+     * @param \DateTime $updatedAt
      * @return $this
      */
-    public function setUpdateAt($updateAt)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->updateAt = $updateAt;
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 
     /**
-     * Get updateAt
+     * Get updatedAt
      *
-     * @return \DateTime $updateAt
+     * @return \DateTime $updatedAt
      */
-    public function getUpdateAt()
+    public function getUpdatedAt()
     {
-        return $this->updateAt;
+        return $this->updatedAt;
     }
 }
