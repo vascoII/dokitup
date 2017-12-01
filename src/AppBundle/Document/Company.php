@@ -1,7 +1,6 @@
 <?php
 namespace AppBundle\Document;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -37,13 +36,7 @@ class Company
     protected $companyType;
     
     /**
-     * 
-     * @ODM\Field(name="attributes", type="collection")
-     */
-    protected $attributes;
-
-    /**
-     * @ODM\ReferenceMany(targetDocument="User", mappedBy="companies")
+     * @ODM\ReferenceMany(targetDocument="User", cascade="all")
      */
     protected $users;
 
@@ -81,7 +74,6 @@ class Company
     {
         $this->users = new ArrayCollection();
         $this->folders = new ArrayCollection();
-        $this->attributes = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->updatedAt = null;
     }
@@ -165,28 +157,6 @@ class Company
     }
 
     /**
-     * Set attributes
-     *
-     * @param collection $attributes
-     * @return $this
-     */
-    public function setAttributes($attributes)
-    {
-        $this->attributes = $attributes;
-        return $this;
-    }
-
-    /**
-     * Get attributes
-     *
-     * @return collection $attributes
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-
-    /**
      * Add user
      *
      * @param User $user
@@ -194,7 +164,6 @@ class Company
     public function addUser(User $user)
     {
         $this->users[] = $user;
-        $user->addCompany($this);
     }
 
     /**

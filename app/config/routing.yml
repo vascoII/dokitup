@@ -1,3 +1,19 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+auth-tokens:
+    type:     rest
+    resource: AppBundle\Controller\AuthTokenController
+
+users:
+    type:     rest
+    resource: AppBundle\Controller\UserController
+
+userRoles:
+    type:     rest
+    resource: AppBundle\Controller\UserRoleController
+
+companyTypes:
+    type:     rest
+    resource: AppBundle\Controller\CompanyTypeController
+
+companies:
+    type:     rest
+    resource: AppBundle\Controller\CompanyController

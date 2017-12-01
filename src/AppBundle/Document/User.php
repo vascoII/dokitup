@@ -4,16 +4,18 @@ namespace AppBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ODM\Document(repositoryClass="AppBundle\Repository\UserRepository")
  * @MongoDBUnique(fields="email")
  */
-class User
+class User implements UserInterface
 {
    /**
      * @var MongoId $id
      * @ODM\Id(strategy="AUTO")
+     *
      */
     protected $id;
     
@@ -191,6 +193,28 @@ class User
     }
 
     /**
+     * Set plainPassword
+     *
+     * @param string $plainPassword
+     * @return $this
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
+    }
+
+    /**
+     * Get plainPassword
+     *
+     * @return string $plainPassword
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
      * Set userRole
      *
      * @param UserRole $userRole
@@ -328,5 +352,25 @@ class User
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    public function getRoles()
+    {
+        return [];
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials()
+    {
+        $this->plainPassword = null;
     }
 }

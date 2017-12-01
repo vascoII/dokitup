@@ -1,0 +1,25 @@
+AppBundle\Document\User:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['users', 'user', 'postUser', 'companies', 'company', 'auth-token']
+        firstName:
+            groups: ['users', 'user', 'postUser', 'companies', 'company', 'auth-token']
+        lastName:
+            groups: ['users', 'user', 'postUser', 'companies', 'company', 'auth-token']
+        email:
+            groups: ['users', 'user', 'postUser', 'companies', 'company', 'auth-token']
+        plainPassword:
+            groups: ['postUser']
+        userRole:
+            groups: ['users', 'user', 'postUser', 'companies', 'company', 'auth-token']
+        companies:
+            groups: ['users', 'user', 'postUser']
+        createdBy:
+            groups: ['users', 'user', 'postUser']
+        createdAt:
+            groups: ['users', 'user', 'postUser']
+        updatedBy:
+            groups: ['users', 'user', 'postUser']
+        updatedAt:
+            groups: ['users', 'user', 'postUser']

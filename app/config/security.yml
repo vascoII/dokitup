@@ -1,11 +1,11 @@
 # To get started with security, check out the documentation:
-# https://symfony.com/doc/current/security.html
+# http://symfony.com/doc/current/book/security.html
 security:
 
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
+        auth_token_user_provider:
+            id: auth_token_user_provider
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -14,11 +14,14 @@ security:
             security: false
 
         main:
+            pattern: ^/
+            stateless: true
+            simple_preauth:
+                authenticator: auth_token_authenticator
+            provider: auth_token_user_provider
             anonymous: ~
-            # activate different ways to authenticate
 
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12

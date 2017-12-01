@@ -1,0 +1,15 @@
+AppBundle\Document\CompanyType:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['companyType']
+        name:
+            groups: ['companies', 'company', 'companyType', 'postCompany', 'users', 'user', 'postUser']
+        createdBy:
+            groups: ['companyType']
+        createdAt:
+            groups: ['companyType']
+        updatedBy:
+            groups: ['companyType']
+        updatedAt:
+            groups: ['companyType']

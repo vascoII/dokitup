@@ -1,0 +1,15 @@
+AppBundle\Document\UserRole:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['userRoles']
+        name:
+            groups: ['userRoles', 'users', 'user', 'postUser', 'company', 'auth-token', 'companies']
+        createdBy:
+            groups: ['userRoles']
+        createdAt:
+            groups: ['userRoles']
+        updatedBy:
+            groups: ['userRoles']
+        updatedAt:
+            groups: ['userRoles']
