@@ -22,6 +22,6 @@ security:
             anonymous: ~
 
     encoders:
-        AppBundle\Entity\User:
+        AppBundle\Document\User:
             algorithm: bcrypt
             cost: 12

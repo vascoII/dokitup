@@ -4,7 +4,12 @@ AppBundle\Document\UserRole:
         id:
             groups: ['userRoles']
         name:
-            groups: ['userRoles', 'users', 'user', 'postUser', 'company', 'auth-token', 'companies']
+            groups: ['userRoles',
+                'users', 'user', 'postUser',
+                'company', 'companies',
+                'auth-token',
+                'adminUserCompany',
+                'self']
         createdBy:
             groups: ['userRoles']
         createdAt:

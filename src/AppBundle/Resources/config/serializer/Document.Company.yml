@@ -2,13 +2,21 @@ AppBundle\Document\Company:
     exclusion_policy: none
     properties:
         id:
-            groups: ['companies', 'company', 'postCompany', 'users', 'user', 'postUser']
+            groups: ['companies', 'company', 'postCompany',
+                'users', 'user', 'postUser',
+                'adminUserCompany']
         name:
-            groups: ['companies', 'company', 'postCompany', 'users', 'user', 'postUser']
+            groups: ['companies', 'company', 'postCompany',
+                'users', 'user', 'postUser',
+                'adminUserCompany']
         address:
-            groups: ['companies', 'company', 'postCompany', 'users', 'user', 'postUser']
+            groups: ['companies', 'company', 'postCompany',
+                'users', 'user', 'postUser',
+                'adminUserCompany']
         companyType:
-            groups: ['companies', 'company', 'postCompany', 'users', 'user', 'postUser']
+            groups: ['companies', 'company', 'postCompany',
+                'users', 'user', 'postUser',
+                'adminUserCompany']
         users:
             groups: ['company']
         folders:

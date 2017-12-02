@@ -2,24 +2,49 @@ AppBundle\Document\User:
     exclusion_policy: none
     properties:
         id:
-            groups: ['users', 'user', 'postUser', 'companies', 'company', 'auth-token']
+            groups: ['users', 'user', 'postUser',
+                'companies', 'company',
+                'auth-token',
+                'adminUserCompany',
+                'self']
         firstName:
-            groups: ['users', 'user', 'postUser', 'companies', 'company', 'auth-token']
+            groups: ['users', 'user', 'postUser',
+                'companies', 'company',
+                'auth-token',
+                'adminUserCompany',
+                'self']
         lastName:
-            groups: ['users', 'user', 'postUser', 'companies', 'company', 'auth-token']
+            groups: ['users', 'user', 'postUser',
+                'companies', 'company',
+                'auth-token',
+                'adminUserCompany',
+                'self']
         email:
-            groups: ['users', 'user', 'postUser', 'companies', 'company', 'auth-token']
+            groups: ['users', 'user', 'postUser',
+                'companies', 'company',
+                'auth-token',
+                'adminUserCompany',
+                'self']
         plainPassword:
-            groups: ['postUser']
+            groups: ['postUser', 'adminUserCompany']
         userRole:
-            groups: ['users', 'user', 'postUser', 'companies', 'company', 'auth-token']
+            groups: ['users', 'user', 'postUser',
+                'companies', 'company',
+                'auth-token',
+                'adminUserCompany',
+                'self']
         companies:
-            groups: ['users', 'user', 'postUser']
+            groups: ['users', 'user', 'postUser',
+                'adminUserCompany']
         createdBy:
-            groups: ['users', 'user', 'postUser']
+            groups: ['users', 'user', 'postUser',
+                'self']
         createdAt:
-            groups: ['users', 'user', 'postUser']
+            groups: ['users', 'user', 'postUser',
+                'self']
         updatedBy:
-            groups: ['users', 'user', 'postUser']
+            groups: ['users', 'user', 'postUser',
+                'self']
         updatedAt:
-            groups: ['users', 'user', 'postUser']
+            groups: ['users', 'user', 'postUser',
+                'self']

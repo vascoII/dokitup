@@ -2,9 +2,17 @@ auth-tokens:
     type:     rest
     resource: AppBundle\Controller\AuthTokenController
 
-users:
+admins:
+    type:     rest
+    resource: AppBundle\Controller\AdminController
+
+selfUser:
     type:     rest
     resource: AppBundle\Controller\UserController
+
+users:
+    type:     rest
+    resource: AppBundle\Controller\selfUserController
 
 userRoles:
     type:     rest

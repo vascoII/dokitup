@@ -4,7 +4,10 @@ AppBundle\Document\CompanyType:
         id:
             groups: ['companyType']
         name:
-            groups: ['companies', 'company', 'companyType', 'postCompany', 'users', 'user', 'postUser']
+            groups: ['companies', 'company',
+                'companyType', 'postCompany',
+                'users', 'user', 'postUser',
+                'adminUserCompany']
         createdBy:
             groups: ['companyType']
         createdAt:
