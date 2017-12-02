@@ -34,7 +34,7 @@ AppBundle\Document\User:
                 'adminUserCompany',
                 'self']
         companies:
-            groups: ['users', 'user', 'postUser',
+            groups: ['user',
                 'adminUserCompany']
         createdBy:
             groups: ['users', 'user', 'postUser',

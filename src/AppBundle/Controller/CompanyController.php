@@ -2,15 +2,15 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Document\CompanyType;
 use AppBundle\Form\Type\CompanyForm;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View as FOSView;
 use AppBundle\Document\Company;
 
-class CompanyController extends Controller
+class CompanyController extends CommonController
 {
     /**
      *
@@ -20,30 +20,26 @@ class CompanyController extends Controller
      */
     public function getCompaniesAction(Request $request)
     {
-        $companies = $this->get('doctrine.odm.mongodb.document_manager')
-            ->getRepository('AppBundle:Company')
-            ->findAll();
+        /**
+         * SelfUser
+         */
+        $selfUser = $this->getUserByToken($request);
 
-        return $companies;
+        return $selfUser->getCompanies();
     }
 
     /**
      *
      *
-     * @Rest\View(statusCode=Response::HTTP_NO_CONTENT, serializerGroups={"company"})
+     * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"company"})
      * @Rest\Get("companies/{company_id}")
      */
     public function getCompanyAction(Request $request)
     {
-        $company = $this->get('doctrine.odm.mongodb.document_manager')
-            ->getRepository('AppBundle:Company')
-            ->find($request->get('company_id'));
+        $company = $this->getCompanyByUser($request);
 
-        if (empty($company)) {
-            return FOSView::create(
-                ['message' => ' Company not found'],
-                Response::HTTP_NOT_FOUND
-            );
+        if (!$company instanceof Company) {
+            return $this->companyNotFound();
         }
 
         return $company;
@@ -57,38 +53,30 @@ class CompanyController extends Controller
      */
     public function postCompanyAction(Request $request)
     {
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-
+        $dm = $this->getDoctrineManager();
         /**
          * CompanyType
          */
-        $companyType = $this->get('doctrine.odm.mongodb.document_manager')
-            ->getRepository('AppBundle:CompanyType')
-            ->find($request->request->get('companyType'));
+        $companyType = $this->getCompanyType($request->request->get('companyType'));
 
-        if (empty($companyType)) {
-            return FOSView::create(
-                ['message' => ' Company Type not found'],
-                Response::HTTP_NOT_FOUND
-            );
+        if (!$companyType instanceof CompanyType) {
+            return $this->companyTypeNotFound();
         }
-
         /**
-         * Owner
+         * Company
          */
-
-
-
-
-
         $company = new Company();
         $company->setCompanyType($companyType);
         $request->request->remove('companyType');
-
+        /**
+         * Form
+         */
         $form = $this->createForm(CompanyForm::class, $company);
         $form->submit($request->request->all());
 
         if ($form->isValid()) {
+            $company = $this->setCreated($company, $request);
+
             $dm->persist($company);
             $dm->flush();
 
@@ -106,28 +94,23 @@ class CompanyController extends Controller
      */
     public function patchCompanyAction(Request $request)
     {
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $company = $this->get('doctrine.odm.mongodb.document_manager')
-            ->getRepository('AppBundle:Company')
-            ->find($request->get('company_id'));
+        $dm = $this->getDoctrineManager();
+        /**
+         * Company
+         */
+        $company = $this->getCompanyByUser($request);
 
-        if (empty($company)) {
-            return FOSView::create(
-                ['message' => ' Company not found'],
-                Response::HTTP_NOT_FOUND
-            );
+        if (!$company instanceof Company) {
+            return $this->companyNotFound();
         }
-
+        /**
+         * CompanyType
+         */
         if (null !== $request->request->get('companyType')) {
-            $companyType = $this->get('doctrine.odm.mongodb.document_manager')
-                ->getRepository('AppBundle:CompanyType')
-                ->find($request->request->get('companyType'));
+            $companyType = $this->getCompanyType($request->request->get('companyType'));
 
-            if (empty($companyType)) {
-                return FOSView::create(
-                    ['message' => ' Company Type not found'],
-                    Response::HTTP_NOT_FOUND
-                );
+            if (!$companyType instanceof CompanyType) {
+                return $this->companyTypeNotFound();
             }
             $company->setCompanyType($companyType);
             $request->request->remove('companyType');
@@ -138,6 +121,8 @@ class CompanyController extends Controller
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
+            $company = $this->setUpdated($company, $request);
+
             $dm->persist($company);
             $dm->flush();
 
@@ -155,16 +140,14 @@ class CompanyController extends Controller
      */
     public function deleteCompanyAction(Request $request)
     {
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $company = $this->get('doctrine.odm.mongodb.document_manager')
-            ->getRepository('AppBundle:Company')
-            ->find($request->get('company_id'));
+        $dm = $this->getDoctrineManager();
+        /**
+         * Company
+         */
+        $company = $this->getCompanyByUser($request);
 
-        if (empty($company)) {
-            return FOSView::create(
-                ['message' => ' Company not found'],
-                Response::HTTP_NOT_FOUND
-            );
+        if (!$company instanceof Company) {
+            return $this->companyNotFound();
         }
 
         $dm->remove($company);

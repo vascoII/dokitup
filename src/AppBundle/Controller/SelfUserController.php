@@ -5,10 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Document\UserRole;
 use AppBundle\Form\Type\UserForm;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View as FOSView;
-use AppBundle\Document\User;
 
 class SelfUserController extends CommonController
 {
@@ -24,7 +21,6 @@ class SelfUserController extends CommonController
          * SelfUser
          */
         $selfUser = $this->getUserByToken($request);
-
         return $selfUser;
     }
 
@@ -44,7 +40,7 @@ class SelfUserController extends CommonController
         $selfUser = $this->getUserByToken($request);
 
         /**
-         * Patch Role
+         * Patch userRole
          */
         if (null !== $request->request->get('userRole'))
         {
@@ -66,8 +62,9 @@ class SelfUserController extends CommonController
              */
             if (null !== $request->request->get('plainPassword')) {
                 $encoder = $this->get('security.password_encoder');
-                $encoded = $encoder->encodePassword($selfUser, $request->get('userPlainPassword'));
+                $encoded = $encoder->encodePassword($selfUser, $request->get('plainPassword'));
                 $selfUser->setPassword($encoded);
+                $selfUser->setPlainPassword($request->get('plainPassword'));
             }
             $selfUser->setUpdatedAt(new \DateTime());
 

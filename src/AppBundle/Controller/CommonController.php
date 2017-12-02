@@ -2,7 +2,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Document\Company;
+use AppBundle\Document\CompanyType;
 use AppBundle\Document\User;
+use AppBundle\Document\UserRole;
+use Doctrine\ODM\MongoDB\Types\ObjectIdType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,34 +34,140 @@ class CommonController extends Controller
         return $userByToken;
     }
 
+    /*
+     * @param string $companyTypeId
+     * @return CompanyType
+     */
     protected function getCompanyType($companyTypeId)
     {
         $companyType = $this->getDoctrineManager()
             ->getRepository('AppBundle:CompanyType')
             ->find($companyTypeId);
 
-        if (empty($companyType)) {
-            return FOSView::create(
-                ['message' => ' Company Type not found'],
-                Response::HTTP_NOT_FOUND
-            );
+        if (!$companyType instanceof CompanyType) {
+            return false;
         }
         return $companyType;
     }
 
+    /*
+     * @param string $userRoleId
+     * @return UserRole
+     */
     protected function getUserRole($userRoleId)
     {
         $userRole = $this->getDoctrineManager()
             ->getRepository('AppBundle:UserRole')
             ->find($userRoleId);
 
-        if (empty($userRole)) {
-            return $this->userRoleNotFound();
+        if (!$userRole instanceof UserRole) {
+            return false;
         }
         return $userRole;
     }
 
+    /**
+     * @param Request $request
+     * @return Company
+     */
+    protected function getCompanyByUser($request)
+    {
+        $boolean = false;
+        /*
+         * User
+         */
+        $user = $this->getUserByToken($request);
+        /**
+         * Company
+         */
+        $company = $this->getDoctrineManager()
+            ->getRepository('AppBundle:Company')
+            ->find($request->get('company_id'));
 
+        /**
+         * Company does not exist
+         */
+        if (!$company instanceof Company)
+        {
+            return $boolean;
+        }
+        /*
+         * Company exist
+         * Check if User has Right
+         */
+        foreach ($user->getCompanies() as $userCompany) {
+            if ($userCompany->getId() === $company->getId())
+            {
+                $boolean = true;
+            }
+        }
+
+        return ($boolean === true) ? $company : false;
+    }
+
+    /**
+     * @param Company $company, Request $request
+     * @return User
+     */
+    protected function getUserByCompany($company, $request)
+    {
+        $boolean = false;
+        /**
+         * User
+         */
+        $user = $this->getDoctrineManager()
+            ->getRepository('AppBundle:User')
+            ->find($request->get('user_id'));
+        /**
+         * User does not exist
+         */
+        if (!$user instanceof User)
+        {
+            return $boolean;
+        }
+        /*
+         * User exist
+         * Check if connectedUser has Right
+         */
+        foreach ($company->getUsers() as $companyUser) {
+            if ($companyUser->getId() === $user->getId())
+            {
+                $boolean = true;
+            }
+        }
+
+        return ($boolean === true) ? $user : false;
+
+    }
+
+    /**
+     * Set Updated Object
+     * @var Object, Request $request
+     * @return Object
+     */
+    protected function setUpdated($object, $request)
+    {
+        $userByToken = $this->getUserByToken($request);
+
+        $object->setUpdatedAt(new \DateTime());
+        $object->setUpdatedBy($userByToken);
+
+        return $object;
+    }
+
+    /**
+     * Set Created Object
+     * @var Object, Request $request
+     * @return Object
+     */
+    protected function setCreated($object, $request)
+    {
+        $userByToken = $this->getUserByToken($request);
+
+        $object->setCreatedBy($userByToken);
+
+        return $object;
+    }
 
 /***************************************************************
 ****************** ERROR RESPONSE ******************************
@@ -74,12 +184,45 @@ class CommonController extends Controller
     }
 
     /**
+     * User not Found
+     */
+    protected function userNotFound()
+    {
+        return FOSView::create(
+            ['message' => ' User not found'],
+            Response::HTTP_NOT_FOUND
+        );
+    }
+
+    /**
      * Role not found
      */
     protected function userRoleNotFound()
     {
         return FOSView::create(
             ['message' => ' UserRole not found'],
+            Response::HTTP_NOT_FOUND
+        );
+    }
+
+    /**
+     * Company not found
+     */
+    protected function companyNotFound()
+    {
+        return FOSView::create(
+            ['message' => ' Company not found'],
+            Response::HTTP_NOT_FOUND
+        );
+    }
+
+    /**
+     * CompanyType not found
+     */
+    protected function companyTypeNotFound()
+    {
+        return FOSView::create(
+            ['message' => ' CompanyType not found'],
             Response::HTTP_NOT_FOUND
         );
     }

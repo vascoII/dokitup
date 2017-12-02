@@ -27,7 +27,7 @@ class AdminController extends CommonController
          * Creator
          */
         $creator = $this->getUserByToken($request);
-        if ($creator->getUserRole() !== self::ADMIN) {
+        if ($creator->getUserRole()->getName() !== self::ADMIN) {
             return $this->userNotAllowed();
         }
         /**

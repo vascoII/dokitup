@@ -3,19 +3,19 @@ AppBundle\Document\Company:
     properties:
         id:
             groups: ['companies', 'company', 'postCompany',
-                'users', 'user', 'postUser',
+                'user',
                 'adminUserCompany']
         name:
             groups: ['companies', 'company', 'postCompany',
-                'users', 'user', 'postUser',
+                'user',
                 'adminUserCompany']
         address:
             groups: ['companies', 'company', 'postCompany',
-                'users', 'user', 'postUser',
+                'user',
                 'adminUserCompany']
         companyType:
             groups: ['companies', 'company', 'postCompany',
-                'users', 'user', 'postUser',
+                'user',
                 'adminUserCompany']
         users:
             groups: ['company']
