@@ -6,25 +6,29 @@ AppBundle\Document\User:
                 'companies', 'company',
                 'auth-token',
                 'adminUserCompany',
-                'self']
+                'self',
+                'accessType']
         firstName:
             groups: ['users', 'user', 'postUser',
                 'companies', 'company',
                 'auth-token',
                 'adminUserCompany',
-                'self']
+                'self',
+                'accessType']
         lastName:
             groups: ['users', 'user', 'postUser',
                 'companies', 'company',
                 'auth-token',
                 'adminUserCompany',
-                'self']
+                'self',
+                'accessType']
         email:
             groups: ['users', 'user', 'postUser',
                 'companies', 'company',
                 'auth-token',
                 'adminUserCompany',
-                'self']
+                'self',
+                'accessType']
         plainPassword:
             groups: ['postUser', 'adminUserCompany']
         userRole:
@@ -32,7 +36,8 @@ AppBundle\Document\User:
                 'companies', 'company',
                 'auth-token',
                 'adminUserCompany',
-                'self']
+                'self',
+                'accessType']
         companies:
             groups: ['user',
                 'adminUserCompany']

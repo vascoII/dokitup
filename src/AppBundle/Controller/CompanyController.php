@@ -7,7 +7,6 @@ use AppBundle\Form\Type\CompanyForm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View as FOSView;
 use AppBundle\Document\Company;
 
 class CompanyController extends CommonController
@@ -75,7 +74,7 @@ class CompanyController extends CommonController
         $form->submit($request->request->all());
 
         if ($form->isValid()) {
-            $company = $this->setCreated($company, $request);
+            $company = $this->setCreate($company, $request);
 
             $dm->persist($company);
             $dm->flush();

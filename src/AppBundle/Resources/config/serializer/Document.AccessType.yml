@@ -1,0 +1,15 @@
+AppBundle\Document\AccessType:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['accessType']
+        name:
+            groups: ['accessType']
+        createdBy:
+            groups: ['accessType']
+        createdAt:
+            groups: ['accessType']
+        updatedBy:
+            groups: ['accessType']
+        updatedAt:
+            groups: ['accessType']

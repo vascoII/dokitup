@@ -2,11 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Document\Access;
+use AppBundle\Document\AccessType;
 use AppBundle\Document\Company;
 use AppBundle\Document\CompanyType;
 use AppBundle\Document\User;
 use AppBundle\Document\UserRole;
-use Doctrine\ODM\MongoDB\Types\ObjectIdType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,6 +49,30 @@ class CommonController extends Controller
             return false;
         }
         return $companyType;
+    }
+
+    /**
+     * @return Collection AccessType $accessTypes
+     */
+    protected function getAccessTypes()
+    {
+        $accessTypes = $this->getDoctrineManager()
+            ->getRepository('AppBundle:AccessType')
+            ->findAll();
+
+        return $accessTypes;
+    }
+
+    /**
+     * @return AccessType $accessType
+     */
+    protected function getAccessType($accessTypeId)
+    {
+        $accessType = $this->getDoctrineManager()
+            ->getRepository('AppBundle:AccessType')
+            ->find($accessTypeId);
+
+        return $accessType;
     }
 
     /*
@@ -141,6 +166,20 @@ class CommonController extends Controller
     }
 
     /**
+     * Create Access
+     * @var Folder $folder, Request $request
+     * @return Access $access
+     */
+    protected function createFolderAccess($folder, $request)
+    {
+        $userRole = $this->getUserByToke($request)->getUserRole();
+        /**
+         * For Dokitup V2, the userRole define AccessType
+         */
+
+    }
+
+    /**
      * Set Updated Object
      * @var Object, Request $request
      * @return Object
@@ -160,7 +199,7 @@ class CommonController extends Controller
      * @var Object, Request $request
      * @return Object
      */
-    protected function setCreated($object, $request)
+    protected function setCreate($object, $request)
     {
         $userByToken = $this->getUserByToken($request);
 
@@ -223,6 +262,17 @@ class CommonController extends Controller
     {
         return FOSView::create(
             ['message' => ' CompanyType not found'],
+            Response::HTTP_NOT_FOUND
+        );
+    }
+
+    /**
+     * AccessType not found
+     */
+    protected function accessTypeNotFound()
+    {
+        return FOSView::create(
+            ['message' => ' AccessType not found'],
             Response::HTTP_NOT_FOUND
         );
     }

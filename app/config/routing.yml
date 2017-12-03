@@ -10,14 +10,6 @@ selfUser:
     type:     rest
     resource: AppBundle\Controller\UserController
 
-users:
-    type:     rest
-    resource: AppBundle\Controller\selfUserController
-
-userRoles:
-    type:     rest
-    resource: AppBundle\Controller\UserRoleController
-
 companyTypes:
     type:     rest
     resource: AppBundle\Controller\CompanyTypeController
@@ -25,3 +17,19 @@ companyTypes:
 companies:
     type:     rest
     resource: AppBundle\Controller\CompanyController
+
+folders:
+    type:     rest
+    resource: AppBundle\Controller\FolderController
+
+userRoles:
+    type:     rest
+    resource: AppBundle\Controller\UserRoleController
+
+users:
+    type:     rest
+    resource: AppBundle\Controller\selfUserController
+
+accessTypes:
+    type:     rest
+    resource: AppBundle\Controller\AccessTypeController
