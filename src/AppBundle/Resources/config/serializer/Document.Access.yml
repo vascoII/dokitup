@@ -1,0 +1,19 @@
+AppBundle\Document\Access:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['folder', 'postFolder']
+        accessType:
+            groups: ['folder', 'postFolder']
+        companies:
+            groups: ['folder', 'postFolder']
+        folder:
+            groups: []
+        createdBy:
+            groups: ['folder', 'postFolder']
+        createdAt:
+            groups: ['folder', 'postFolder']
+        updatedBy:
+            groups: ['folder']
+        updatedAt:
+            groups: ['folder']

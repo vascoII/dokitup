@@ -74,7 +74,7 @@ class CompanyController extends CommonController
         $form->submit($request->request->all());
 
         if ($form->isValid()) {
-            $company = $this->setCreate($company, $request);
+            $company = $this->setCreated($company, $request);
 
             $dm->persist($company);
             $dm->flush();

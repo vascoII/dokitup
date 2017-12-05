@@ -66,44 +66,4 @@ class AccessTypeController extends CommonController
         }
     }
 
-    /**
-     *
-     *
-     * @Rest\View(serializerGroups={"accessType"})
-     * @Rest\Patch("accessTypes/{accessType_id}")
-     */
-    public function patchAccessTypeAction(Request $request)
-    {
-        $dm = $this->getDocumentManager();
-
-        $accessType = $this->getAccessType($request->get('accessType_id'));
-
-        if ($accessType instanceof AccessType)
-        {
-            return $this->accessTypeNotFound();
-        }
-
-        $form = $this->createForm(AccessTypeForm::class, $accessType);
-        $form->submit($request->request->all(), false);
-
-        if ($form->isValid()) {
-            $dm->persist($accessType);
-            $dm->flush();
-
-            return $accessType;
-        } else {
-            return $form;
-        }
-    }
-
-    /**
-     *
-     *
-     * @Rest\View(serializerGroups={"accessType"})
-     * @Rest\Delete("accessTypes/{accessType_id}")
-     */
-    public function deleteCompanyTypeAction(Request $request)
-    {
-
-    }
 }

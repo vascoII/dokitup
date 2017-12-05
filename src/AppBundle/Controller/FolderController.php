@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Document\Access;
+use AppBundle\Document\AccessType;
 use AppBundle\Document\Company;
 use AppBundle\Form\Type\FolderForm;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,7 +75,7 @@ class FolderController extends CommonController
         /**
          * Company
          */
-        $company = $this->getCompanyByFolder($request);
+        $company = $this->getCompanyByUser($request);
 
         if (!$company instanceof Company) {
             return $this->companyNotFound();
@@ -90,18 +91,26 @@ class FolderController extends CommonController
         $form->submit($request->request->all());
 
         if ($form->isValid()) {
-            $folder = $this->setCreate($folder, $request);
-            $dm->persist($folder);
-
-            $company->addUser($folder);
-            $dm->persist($company);
             /**
              * Access
              */
             $access = new Access();
-            $access = $this->createFolderAccess($folder, $request);
+            $access = $this->createFolderAccess($access, $folder, $company, $request);
 
+            if (!$access instanceof Access)
+            {
+                return $this->userNotAllowed();
+            }
+            $dm->persist($access);
 
+            $folder = $this->setCreated($folder, $request);
+            $folder->addAccess($access);
+            $folder->addCompany($company);
+            $dm->persist($folder);
+
+            $company = $this->setUpdated($company, $request);
+            $company->addFolder($folder);
+            $dm->persist($company);
 
             $dm->flush();
 
@@ -115,15 +124,15 @@ class FolderController extends CommonController
      *
      *
      * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"postFolder"})
-     * @Rest\Patch("companies/{company_id}/users/{user_id}")
+     * @Rest\Patch("companies/{company_id}/folders/{folder_id}")
      */
     public function patchFolderAction(Request $request)
     {
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $dm = $this->getDoctrineManager();
         /**
          * Company
          */
-        $company = $this->getCompanyByFolder($request);
+        $company = $this->getCompanyByUser($request);
 
         if (!$company instanceof Company) {
             return $this->companyNotFound();
@@ -131,50 +140,172 @@ class FolderController extends CommonController
         /**
          * Folder
          */
-        $Folder = $this->getFolderByCompany($company, $request);
+        $folder = $this->getFolderByCompany($company, $request);
 
-        if (!$Folder instanceof Folder) {
-            return $this->FolderNotFound();
-        }
-        /**
-         * FolderRole
-         */
-        if (null !== $request->request->get('FolderRole')) {
-            $FolderRole = $this->getFolderRole($request->request->get('FolderRole'));
-
-            if (empty($FolderRole)) {
-                return $this->FolderRoleNotFound();
-            }
-            $Folder->setFolderRole($FolderRole);
-            $request->request->remove('FolderRole');
+        if (!$folder instanceof Folder) {
+            return $this->folderNotFound();
         }
         /**
          * Form
          */
-        $form = $this->createForm(FolderForm::class, $Folder);
+        $form = $this->createForm(FolderForm::class, $folder);
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
-            /**
-             * Patch password
-             */
-            if (null !== $request->request->get('plainPassword')) {
-                $encoder = $this->get('security.password_encoder');
-                $encoded = $encoder->encodePassword($Folder, $Folder->getPlainPassword());
-                $Folder->setPassword($encoded);
-            }
-            $Folder = $this->setUpdated($Folder, $request);
-
-            $dm->persist($Folder);
+            $folder = $this->setUpdated($folder, $request);
+            $dm->persist($folder);
             $dm->flush();
 
-            if (null !== $request->request->get('plainPassword')) {
-                $Folder->setPlainPassword($request->request->get('plainPassword'));
-            }
-            return $Folder;
+            return $folder;
         } else {
             return $form;
         }
+    }
+
+    /**
+     *
+     *
+     * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"folder"})
+     * @Rest\Patch("companies/{company_id}/folders/{folder_id}/addCompanyAccess/{addCompany_id}")
+     */
+    public function addFolderAccessToCompanyAction(Request $request)
+    {
+        $dm = $this->getDoctrineManager();
+        /**
+         * AccessType
+         */
+        $accessType = $this->getAccessType($request->request->get('accessType'));
+        if (!$accessType instanceof AccessType) {
+            return $this->accessTypeNotFound();
+        }
+        /**
+         * Company
+         */
+        $company = $this->getCompanyByUser($request);
+
+        if (!$company instanceof Company) {
+            return $this->companyNotFound();
+        }
+        /**
+         * Folder
+         */
+        $folder = $this->getFolderByCompany($company, $request);
+
+        if (!$folder instanceof Folder) {
+            return $this->folderNotFound();
+        }
+        /**
+         * CompanyAdded
+         */
+        $companyAdded = $this->getCompany($request->get('addCompany_id'));
+        if (!$companyAdded instanceof Company) {
+            return $this->companyNotFound();
+        }
+        /**
+         * Access
+         */
+        $access = $this->accessExist($folder, $accessType);
+        if ($access instanceof Access) { //Access already exist :: Add $companyAdded
+            $access = $this->setUpdated($access, $request);
+            $access->addCompany($companyAdded);
+            $dm->persist($access);
+
+        } else { //Access does not exist :: Create new Access
+            /**
+             * Access
+             */
+            $access = new Access();
+            $access->setAccessType($accessType)
+                ->setFolder($folder)
+                ->addCompany($companyAdded);
+            $access = $this->setCreated($access, $request);
+
+            $dm->persist($access);
+        }
+
+        $folder = $this->setUpdated($folder, $request);
+        $folder->addCompany($companyAdded);
+        $folder->addAccess($access);
+        $dm->persist($folder);
+
+        $companyAdded = $this->setUpdated($companyAdded, $request);
+        $companyAdded->addFolder($folder);
+        $dm->persist($companyAdded);
+
+        $dm->flush();
+
+        return $folder;
+    }
+
+    /**
+     *
+     *
+     * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"folder"})
+     * @Rest\Delete("companies/{company_id}/folders/{folder_id}/removeCompanyAccess/{removeCompany_id}")
+     */
+    public function removeFolderFromCompanyAction(Request $request)
+    {
+        $dm = $this->getDoctrineManager();
+        /**
+         * AccessType
+         */
+        $accessType = $this->getAccessType($request->request->get('accessType'));
+        if (!$accessType instanceof AccessType) {
+            return $this->accessTypeNotFound();
+        }
+        /**
+         * Company
+         */
+        $company = $this->getCompanyByUser($request);
+
+        if (!$company instanceof Company) {
+            return $this->companyNotFound();
+        }
+        /**
+         * Folder
+         */
+        $folder = $this->getFolderByCompany($company, $request);
+
+        if (!$folder instanceof Folder) {
+            return $this->folderNotFound();
+        }
+        /**
+         * CompanyRemouved
+         */
+        $companyRemouved = $this->getCompany($request->get('removeCompany_id'));
+        if (!$companyRemouved instanceof Company) {
+            return $this->companyNotFound();
+        }
+        /**
+         * Access
+         */
+        $access = $this->getAccess($folder, $accessType);
+        if ($access instanceof Access)
+        {
+            $access->removeCompany($companyRemouved);
+            $access = $this->setUpdated($access, $request);
+            if (count($access->getCompanies()) == 0)
+            {
+                $folder->removeAccess($access);
+                $folder = $this->setUpdated($folder, $request);
+                $dm->remove($access);
+            } else {
+                $dm->persist($access);
+            }
+        } else {
+            return $this->accessNotFound();
+        }
+
+        $folder->removeCompany($companyRemouved);
+        $dm->persist($folder);
+
+        $companyRemouved = $this->setUpdated($companyRemouved, $request);
+        $companyRemouved->removeFolder($folder);
+        $dm->persist($companyRemouved);
+
+        $dm->flush();
+
+        return $folder;
     }
 
     /**
@@ -185,6 +316,6 @@ class FolderController extends CommonController
      */
     public function deleteFolderAction(Request $request)
     {
-        return new Response('Action delete Folder with ID');
+        die('Action delete Folder with ID');
     }
 }

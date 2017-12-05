@@ -6,6 +6,7 @@ use AppBundle\Document\Access;
 use AppBundle\Document\AccessType;
 use AppBundle\Document\Company;
 use AppBundle\Document\CompanyType;
+use AppBundle\Document\Folder;
 use AppBundle\Document\User;
 use AppBundle\Document\UserRole;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -75,6 +76,18 @@ class CommonController extends Controller
         return $accessType;
     }
 
+    /**
+     * @return AccessType $accessType
+     */
+    protected function getAccessTypeByName($accessTypeName)
+    {
+        $accessType = $this->getDoctrineManager()
+            ->getRepository('AppBundle:AccessType')
+            ->findOneByName($accessTypeName);
+
+        return $accessType;
+    }
+
     /*
      * @param string $userRoleId
      * @return UserRole
@@ -89,6 +102,22 @@ class CommonController extends Controller
             return false;
         }
         return $userRole;
+    }
+
+    /**
+     * @param string $companyId
+     * @return Company
+     */
+    protected function getCompany($companyId)
+    {
+        $company = $this->getDoctrineManager()
+            ->getRepository('AppBundle:Company')
+            ->find($companyId);
+
+        if (!$company instanceof Company) {
+            return false;
+        }
+        return $company;
     }
 
     /**
@@ -132,6 +161,41 @@ class CommonController extends Controller
 
     /**
      * @param Company $company, Request $request
+     * @return Folder
+     */
+    protected function getFolderByCompany($company, $request)
+    {
+        $boolean = false;
+        /**
+         * Folder
+         */
+        $folder = $this->getDoctrineManager()
+            ->getRepository('AppBundle:Folder')
+            ->find($request->get('folder_id'));
+
+        /**
+         * Folder does not exist
+         */
+        if (!$folder instanceof Folder)
+        {
+            return $boolean;
+        }
+        /*
+         * Folder exist
+         * Check if User has Right
+         */
+        foreach ($company->getFolders() as $companyFolder) {
+            if ($companyFolder->getId() === $folder->getId())
+            {
+                $boolean = true;
+            }
+        }
+
+        return ($boolean === true) ? $folder : false;
+    }
+
+    /**
+     * @param Company $company, Request $request
      * @return User
      */
     protected function getUserByCompany($company, $request)
@@ -167,16 +231,70 @@ class CommonController extends Controller
 
     /**
      * Create Access
-     * @var Folder $folder, Request $request
+     * @var Access $access, Folder $folder, Company $company, Request $request
      * @return Access $access
      */
-    protected function createFolderAccess($folder, $request)
+    protected function createFolderAccess($access, $folder, $company, $request)
     {
-        $userRole = $this->getUserByToke($request)->getUserRole();
         /**
-         * For Dokitup V2, the userRole define AccessType
+         * For Dokitup V2, userRole defines AccessType
          */
+        $accessRights = ['owner' => 'CRUD', 'accountant' => 'RU'];
 
+        $user = $this->getUserByToken($request);
+        $userRole = $user->getUserRole()->getName();
+        /**
+         * AccessType
+         */
+        if (!array_key_exists($userRole, $accessRights))
+        {
+            return false;
+        }
+        $accessType = $this->getAccessTypeByName($accessRights[$userRole]);
+        /**
+         * Access
+         */
+        $access->setAccessType($accessType)
+            ->setFolder($folder)
+            ->setCreatedBy($user)
+            ->addCompany($company);
+
+        return $access;
+    }
+
+    protected function accessExist($folder, $accessType)
+    {
+        $boolean = false;
+
+        foreach ($folder->getAccesses() as $folderAccess) {
+            if ($folderAccess->getId() === $accessType->getId())
+            {
+                $boolean = true;
+            }
+        }
+
+        return ($boolean === true) ? $accessType : false;
+
+    }
+
+    protected function getAccess($folder, $accessType)
+    {
+        $array = [
+            'accessType' => $accessType,
+            'folder' => $folder
+        ];
+        $access = $this->getDoctrineManager()
+            ->getRepository('AppBundle:Access')
+            ->findOneBy($array);
+        /**
+         * Access does not exist
+         */
+        if (!$access instanceof Access)
+        {
+            return false;
+        }
+
+        return $access;
     }
 
     /**
@@ -199,7 +317,7 @@ class CommonController extends Controller
      * @var Object, Request $request
      * @return Object
      */
-    protected function setCreate($object, $request)
+    protected function setCreated($object, $request)
     {
         $userByToken = $this->getUserByToken($request);
 
@@ -217,7 +335,7 @@ class CommonController extends Controller
     protected function userNotAllowed()
     {
         return FOSView::create(
-            ['message' => ' User not allowed'],
+            ['message' => 'User not allowed'],
             Response::HTTP_FORBIDDEN
         );
     }
@@ -228,7 +346,7 @@ class CommonController extends Controller
     protected function userNotFound()
     {
         return FOSView::create(
-            ['message' => ' User not found'],
+            ['message' => 'User not found'],
             Response::HTTP_NOT_FOUND
         );
     }
@@ -239,7 +357,7 @@ class CommonController extends Controller
     protected function userRoleNotFound()
     {
         return FOSView::create(
-            ['message' => ' UserRole not found'],
+            ['message' => 'UserRole not found'],
             Response::HTTP_NOT_FOUND
         );
     }
@@ -250,7 +368,7 @@ class CommonController extends Controller
     protected function companyNotFound()
     {
         return FOSView::create(
-            ['message' => ' Company not found'],
+            ['message' => 'Company not found'],
             Response::HTTP_NOT_FOUND
         );
     }
@@ -261,7 +379,7 @@ class CommonController extends Controller
     protected function companyTypeNotFound()
     {
         return FOSView::create(
-            ['message' => ' CompanyType not found'],
+            ['message' => 'CompanyType not found'],
             Response::HTTP_NOT_FOUND
         );
     }
@@ -272,7 +390,29 @@ class CommonController extends Controller
     protected function accessTypeNotFound()
     {
         return FOSView::create(
-            ['message' => ' AccessType not found'],
+            ['message' => 'AccessType not found'],
+            Response::HTTP_NOT_FOUND
+        );
+    }
+
+    /**
+     * Access not found
+     */
+    protected function accessNotFound()
+    {
+        return FOSView::create(
+            ['message' => 'Access not found'],
+            Response::HTTP_NOT_FOUND
+        );
+    }
+
+    /*
+     * Folder not found
+     */
+    protected function folderNotFound()
+    {
+        return FOSView::create(
+            ['message' => 'Folder not found'],
             Response::HTTP_NOT_FOUND
         );
     }

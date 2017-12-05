@@ -2,13 +2,14 @@
 
 namespace AppBundle\Repository;
 
-use Doctrine\ODM\MongoDB\DocumentRepository as DR;
+use Doctrine\ODM\MongoDB\DocumentRepository;
+
 
 /**
  * UserRoleRepository
  *
  */
-class UserRoleRepository extends DR
+class UserRoleRepository extends DocumentRepository
 {
     
 }

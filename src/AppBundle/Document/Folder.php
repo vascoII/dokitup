@@ -25,7 +25,7 @@ class Folder
     protected $name;
     
     /**
-     * @ODM\ReferenceMany(targetDocument="Access", mappedBy="folder")
+     * @ODM\ReferenceMany(targetDocument="Access")
      */
     protected $accesses;
 	

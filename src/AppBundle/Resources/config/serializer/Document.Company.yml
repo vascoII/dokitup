@@ -4,19 +4,22 @@ AppBundle\Document\Company:
         id:
             groups: ['companies', 'company', 'postCompany',
                 'user',
-                'adminUserCompany']
+                'adminUserCompany',
+                'folder', 'postFolder']
         name:
             groups: ['companies', 'company', 'postCompany',
                 'user',
-                'adminUserCompany']
+                'adminUserCompany',
+                'folder', 'postFolder']
         address:
             groups: ['companies', 'company', 'postCompany',
                 'user',
-                'adminUserCompany']
+                'folder', 'adminUserCompany']
         companyType:
             groups: ['companies', 'company', 'postCompany',
                 'user',
-                'adminUserCompany']
+                'adminUserCompany',
+                'folder']
         users:
             groups: ['company']
         folders:

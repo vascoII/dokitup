@@ -3,11 +3,12 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ODM\MongoDB\DocumentRepository;
+
 /**
- * CompanyTypeRepository
+ * DocRepository
  *
  */
-class CompanyTypeRepository extends DocumentRepository
+class DocRepository extends DocumentRepository
 {
     
 }

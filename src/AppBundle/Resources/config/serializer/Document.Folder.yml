@@ -1,0 +1,21 @@
+AppBundle\Document\Folder:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['folders', 'folder', 'postFolder']
+        name:
+            groups: ['folders', 'folder', 'postFolder']
+        accesses:
+            groups: ['folder', 'postFolder']
+        companies:
+            groups: ['postFolder']
+        documents:
+            groups: ['folder']
+        createdBy:
+            groups: ['folder', 'postFolder']
+        createdAt:
+            groups: ['folder', 'postFolder']
+        updatedBy:
+            groups: ['folders', 'folder']
+        updatedAt:
+            groups: ['folders', 'folder']

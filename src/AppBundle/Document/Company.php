@@ -36,12 +36,12 @@ class Company
     protected $companyType;
     
     /**
-     * @ODM\ReferenceMany(targetDocument="User", cascade="all")
+     * @ODM\ReferenceMany(targetDocument="User")
      */
     protected $users;
 
     /**
-     * @ODM\ReferenceMany(targetDocument="Folder", mappedBy="companies")
+     * @ODM\ReferenceMany(targetDocument="Folder")
      */
     protected $folders;
     

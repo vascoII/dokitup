@@ -6,10 +6,10 @@ use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 
 
 /**
- * @ODM\Document(repositoryClass="AppBundle\Repository\DocumentRepository")
+ * @ODM\Document(repositoryClass="AppBundle\Repository\DocRepository")
  * @MongoDBUnique(fields="fileName")
  */
-class Document
+class Doc
 {
     /**
      * @var MongoId $id

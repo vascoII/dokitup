@@ -7,21 +7,24 @@ AppBundle\Document\User:
                 'auth-token',
                 'adminUserCompany',
                 'self',
-                'accessType']
+                'accessType',
+                'postFolder']
         firstName:
             groups: ['users', 'user', 'postUser',
                 'companies', 'company',
                 'auth-token',
                 'adminUserCompany',
                 'self',
-                'accessType']
+                'accessType',
+                'postFolder', 'folder']
         lastName:
             groups: ['users', 'user', 'postUser',
                 'companies', 'company',
                 'auth-token',
                 'adminUserCompany',
                 'self',
-                'accessType']
+                'accessType',
+                'postFolder', 'folder']
         email:
             groups: ['users', 'user', 'postUser',
                 'companies', 'company',
@@ -42,14 +45,14 @@ AppBundle\Document\User:
             groups: ['user',
                 'adminUserCompany']
         createdBy:
-            groups: ['users', 'user', 'postUser',
+            groups: ['user', 'postUser',
                 'self']
         createdAt:
-            groups: ['users', 'user', 'postUser',
+            groups: ['user', 'postUser',
                 'self']
         updatedBy:
-            groups: ['users', 'user', 'postUser',
+            groups: ['user', 'postUser',
                 'self']
         updatedAt:
-            groups: ['users', 'user', 'postUser',
+            groups: ['user', 'postUser',
                 'self']

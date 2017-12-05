@@ -7,7 +7,8 @@ AppBundle\Document\CompanyType:
             groups: ['companies', 'company',
                 'companyType', 'postCompany',
                 'user',
-                'adminUserCompany']
+                'adminUserCompany',
+                'folder']
         createdBy:
             groups: ['companyType']
         createdAt:
