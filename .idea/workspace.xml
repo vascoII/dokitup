@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8457a669-bb9b-40c1-882e-c194e0780a37" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CommonController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CommonController.php" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/DocController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/DocController.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -258,7 +256,7 @@
       <workItem from="1512065127535" duration="75177000" />
       <workItem from="1512311053133" duration="922000" />
       <workItem from="1512316680306" duration="17543000" />
-      <workItem from="1512427398441" duration="22090000" />
+      <workItem from="1512427398441" duration="22118000" />
     </task>
     <task id="LOCAL-00001" summary="Document and Repository Added">
       <created>1512002159004</created>
@@ -316,11 +314,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512446546683</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add Doc Controller :: CRUD =&gt; Done">
+      <created>1512450229144</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1512450229144</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124819000" />
+    <option name="totallyTimeSpent" value="124847000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1040" height="784" extended-state="6" />
@@ -361,7 +366,8 @@
     <MESSAGE value="AccessType Document CR" />
     <MESSAGE value="Add Folder Controller :: CRUD folder and addCompanyAccess, removeCompanyAccess" />
     <MESSAGE value="Add Doc Controller :: read List, read Document, create Document =&gt; Done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Doc Controller :: read List, read Document, create Document =&gt; Done" />
+    <MESSAGE value="Add Doc Controller :: CRUD =&gt; Done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Doc Controller :: CRUD =&gt; Done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
