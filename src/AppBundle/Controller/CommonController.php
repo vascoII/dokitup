@@ -350,6 +350,33 @@ class CommonController extends Controller
     }
 
     /**
+     * Set Updated Object
+     * @var Document $document, Request $request
+     * @return Document $document
+     */
+    protected function setUpdatedDoc($document, $request)
+    {
+        $userByToken = $this->getUserByToken($request);
+
+        switch ($userByToken->getUserRole()->getName()) {
+            case 'owner':
+                $document->setUpdatedByOwnerAt(new \DateTime());
+                $document->setUpdatedByOwner($userByToken);
+                $document->setBoolOwner($request->request->get('bool'));
+                break;
+            case 'accountant':
+                $document->setUpdatedByViewerAt(new \DateTime());
+                $document->setUpdatedByViewer($userByToken);
+                $document->setBoolViewer($request->request->get('bool'));
+                break;
+            default:
+                return false;
+        }
+
+        return $document;
+    }
+
+    /**
      * Set Created Object
      * @var Object, Request $request
      * @return Object

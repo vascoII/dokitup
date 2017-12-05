@@ -14,6 +14,7 @@ class DocController extends CommonController
 {
     const OWNER = 'owner';
     const ACCOUNTANT = 'accountant';
+    const CRUD = 'CRUD';
     /**
      *
      *
@@ -82,21 +83,18 @@ class DocController extends CommonController
             return $this->folderNotFound();
         }
         /**
-         * Access to Folder from Company
-         */
-        $access = $dm->getRepository('AppBundle:Access')
-            ->findAccessByFolderCompany($folder, $company);
-
-        /**
          * Doc
          */
         $doc = $this->getDocByFolder($folder, $request);
         if (!$doc instanceof Doc) {
             return $this->docNotFound();
         }
-        $doc->getFolder()->getAccesses()->clear();
-        $doc->getFolder()->getAccesses()->add($access);
-        return $doc;
+
+        $pdfPath = $this->getParameter('uploaded_dir').
+            $doc->getFileUrl().$doc->getFileName();
+
+        return $this->file($pdfPath);
+
     }
 
     /**
@@ -174,5 +172,107 @@ class DocController extends CommonController
         $dm->flush();
 
         return $document;
+    }
+
+    /**
+     * @Rest\View(serializerGroups={"doc"})
+     * @Rest\Patch("companies/{company_id}/folders/{folder_id}/docs/{doc_id}")
+     */
+    public function patchDocAction(Request $request)
+    {
+        $dm = $this->getDoctrineManager();
+        /**
+         * Company
+         */
+        $company = $this->getCompanyByUser($request);
+
+        if (!$company instanceof Company) {
+            return $this->companyNotFound();
+        }
+        /**
+         * Folder
+         */
+        $folder = $this->getFolderByCompany($company, $request);
+
+        if (!$folder instanceof Folder) {
+            return $this->folderNotFound();
+        }
+        /**
+         * Doc
+         */
+        $doc = $this->getDocByFolder($folder, $request);
+        if (!$doc instanceof Doc) {
+            return $this->docNotFound();
+        }
+
+        $doc = $this->setUpdatedDoc($doc, $request);
+        if (!$doc instanceof Doc)
+        {
+            return $this->userNotAllowed();
+        }
+        /**
+         * Access to Folder from Company
+         */
+        $access = $dm->getRepository('AppBundle:Access')
+            ->findAccessByFolderCompany($folder, $company);
+
+        $dm->persist($doc);
+        $dm->flush();
+
+        $doc->getFolder()->getAccesses()->clear();
+        $doc->getFolder()->getAccesses()->add($access);
+        return $doc;
+    }
+
+    /**
+     * @Rest\View(statusCode=Response::HTTP_NO_CONTENT, serializerGroups={"doc"})
+     * @Rest\Delete("companies/{company_id}/folders/{folder_id}/docs/{doc_id}")
+     */
+    public function deleteDocAction(Request $request)
+    {
+        $dm = $this->getDoctrineManager();
+        /**
+         * Company
+         */
+        $company = $this->getCompanyByUser($request);
+
+        if (!$company instanceof Company) {
+            return $this->companyNotFound();
+        }
+        /**
+         * Folder
+         */
+        $folder = $this->getFolderByCompany($company, $request);
+
+        if (!$folder instanceof Folder) {
+            return $this->folderNotFound();
+        }
+        /**
+         * Doc
+         */
+        $doc = $this->getDocByFolder($folder, $request);
+        if (!$doc instanceof Doc) {
+            return $this->docNotFound();
+        }
+
+        $doc = $this->setUpdatedDoc($doc, $request);
+        if (!$doc instanceof Doc)
+        {
+            return $this->userNotAllowed();
+        }
+        /**
+         * Access to Folder from Company
+         */
+        $access = $dm->getRepository('AppBundle:Access')
+            ->findAccessByFolderCompany($folder, $company);
+        if ($access->getAccessType()->getName() == self::CRUD)
+        {
+            $dm->remove($doc);
+            $dm->flush();
+        } else {
+            return $this->userNotAllowed();
+        }
+
+
     }
 }
