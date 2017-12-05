@@ -7,7 +7,7 @@ use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 
 
 /**
- * @ODM\Document(repositoryClass="AppBundle\Repository\DocRepository")
+ * @ODM\Document(repositoryClass="AppBundle\Repository\AccessRepository")
  * @MongoDBUnique(fields="accessType", fields="company", fields="folder")
  */
 class Access

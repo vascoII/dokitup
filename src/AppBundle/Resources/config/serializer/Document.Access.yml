@@ -4,7 +4,7 @@ AppBundle\Document\Access:
         id:
             groups: ['folder', 'postFolder']
         accessType:
-            groups: ['folder', 'postFolder']
+            groups: ['folder', 'postFolder', 'docs', 'doc']
         companies:
             groups: ['folder', 'postFolder']
         folder:

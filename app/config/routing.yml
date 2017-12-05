@@ -33,3 +33,7 @@ users:
 accessTypes:
     type:     rest
     resource: AppBundle\Controller\AccessTypeController
+
+docs:
+    type:     rest
+    resource: AppBundle\Controller\DocController

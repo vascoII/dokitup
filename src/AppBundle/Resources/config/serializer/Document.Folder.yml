@@ -4,12 +4,12 @@ AppBundle\Document\Folder:
         id:
             groups: ['folders', 'folder', 'postFolder']
         name:
-            groups: ['folders', 'folder', 'postFolder']
+            groups: ['folders', 'folder', 'postFolder', 'postDoc', 'docs', 'doc']
         accesses:
-            groups: ['folder', 'postFolder']
+            groups: ['folder', 'postFolder', 'docs', 'doc']
         companies:
-            groups: ['postFolder']
-        documents:
+            groups: ['postFolder', 'postDoc']
+        docs:
             groups: ['folder']
         createdBy:
             groups: ['folder', 'postFolder']

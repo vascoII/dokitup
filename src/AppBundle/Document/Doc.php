@@ -30,6 +30,12 @@ class Doc
     private $fileUrl;
 
     /**
+     * NotBlank
+     * @ODM\Field(name="year", type="date")
+     */
+    private $year;
+
+    /**
      * 
      * @ODM\Field(name="boolViewer", type="boolean")
      */
@@ -254,6 +260,28 @@ class Doc
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set year
+     *
+     * @param \DateTime $year
+     * @return $this
+     */
+    public function setYear($year)
+    {
+        $this->year = $year;
+        return $this;
+    }
+
+    /**
+     * Get $year
+     *
+     * @return \DateTime $year
+     */
+    public function getYear()
+    {
+        return $this->year;
     }
 
     /**

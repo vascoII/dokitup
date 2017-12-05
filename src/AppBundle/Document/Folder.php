@@ -35,9 +35,9 @@ class Folder
     protected $companies;
     
     /**
-     * @ODM\ReferenceMany(targetDocument="Document", cascade="all")
+     * @ODM\ReferenceMany(targetDocument="Doc", cascade="all")
      */
-    protected $documents;
+    protected $docs;
     
     /**
      * @var User $user 
@@ -66,7 +66,7 @@ class Folder
     
     public function __construct() 
     {
-        $this->documents = new ArrayCollection();
+        $this->docs = new ArrayCollection();
 		$this->companies = new ArrayCollection();
         $this->accesses = new ArrayCollection();
         $this->createdAt = new \DateTime();
@@ -166,33 +166,33 @@ class Folder
     }
 
     /**
-     * Add document
+     * Add doc
      *
-     * @param Document $document
+     * @param Doc $doc
      */
-    public function addDocument(Document $document)
+    public function addDoc(Doc $doc)
     {
-        $this->documents[] = $document;
+        $this->docs[] = $doc;
     }
 
     /**
-     * Remove document
+     * Remove doc
      *
-     * @param Document $document
+     * @param Doc $doc
      */
-    public function removeDocument(Document $document)
+    public function removeDoc(Doc $doc)
     {
-        $this->documents->removeElement($document);
+        $this->docs->removeElement($doc);
     }
 
     /**
-     * Get documents
+     * Get docs
      *
-     * @return \Doctrine\Common\Collections\Collection $documents
+     * @return \Doctrine\Common\Collections\Collection $docs
      */
-    public function getDocuments()
+    public function getDocs()
     {
-        return $this->documents;
+        return $this->docs;
     }
 
     /**

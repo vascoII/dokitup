@@ -10,7 +10,8 @@ AppBundle\Document\Company:
             groups: ['companies', 'company', 'postCompany',
                 'user',
                 'adminUserCompany',
-                'folder', 'postFolder']
+                'folder', 'postFolder',
+                'postDoc']
         address:
             groups: ['companies', 'company', 'postCompany',
                 'user',

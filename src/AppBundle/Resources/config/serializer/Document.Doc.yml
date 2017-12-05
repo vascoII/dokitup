@@ -1,0 +1,27 @@
+AppBundle\Document\Doc:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['folder', 'docs', 'doc', 'postDoc']
+        fileName:
+            groups: ['folder', 'docs', 'doc', 'postDoc']
+        fileUrl:
+            groups: ['folder', 'docs', 'doc', 'postDoc']
+        boolViewer:
+            groups: ['folder', 'docs', 'doc']
+        boolOwner:
+            groups: ['folder', 'docs', 'doc']
+        folder:
+            groups: ['folder', 'docs', 'doc']
+        createdBy:
+            groups: ['doc']
+        createdAt:
+            groups: ['doc']
+        updatedByOwner:
+            groups: ['doc']
+        updatedByOwnerAt:
+            groups: ['doc']
+        updatedByViewer:
+            groups: ['doc']
+        updatedByViewerAt:
+            groups: ['doc']

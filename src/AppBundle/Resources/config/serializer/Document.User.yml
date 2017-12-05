@@ -16,7 +16,8 @@ AppBundle\Document\User:
                 'adminUserCompany',
                 'self',
                 'accessType',
-                'postFolder', 'folder']
+                'postFolder', 'folder',
+                'postDoc', 'doc']
         lastName:
             groups: ['users', 'user', 'postUser',
                 'companies', 'company',
@@ -24,14 +25,16 @@ AppBundle\Document\User:
                 'adminUserCompany',
                 'self',
                 'accessType',
-                'postFolder', 'folder']
+                'postFolder', 'folder',
+                'postDoc', 'doc']
         email:
             groups: ['users', 'user', 'postUser',
                 'companies', 'company',
                 'auth-token',
                 'adminUserCompany',
                 'self',
-                'accessType']
+                'accessType',
+                'postDoc', 'doc']
         plainPassword:
             groups: ['postUser', 'adminUserCompany']
         userRole:

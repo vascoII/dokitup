@@ -6,6 +6,7 @@ use AppBundle\Document\Access;
 use AppBundle\Document\AccessType;
 use AppBundle\Document\Company;
 use AppBundle\Document\CompanyType;
+use AppBundle\Document\Doc;
 use AppBundle\Document\Folder;
 use AppBundle\Document\User;
 use AppBundle\Document\UserRole;
@@ -195,6 +196,41 @@ class CommonController extends Controller
     }
 
     /**
+     * @param Folder $folder, Request $request
+     * @return Folder
+     */
+    protected function getDocByFolder($folder, $request)
+    {
+        $boolean = false;
+        /**
+         * Document
+         */
+        $document = $this->getDoctrineManager()
+            ->getRepository('AppBundle:Doc')
+            ->find($request->get('doc_id'));
+
+        /**
+         * Document does not exist
+         */
+        if (!$document instanceof Doc)
+        {
+            return $boolean;
+        }
+        /*
+         * Document exist
+         * Check if User has Right
+         */
+        foreach ($folder->getDocs() as $folderDocument) {
+            if ($folderDocument->getId() === $document->getId())
+            {
+                $boolean = true;
+            }
+        }
+
+        return ($boolean === true) ? $document : false;
+    }
+
+    /**
      * @param Company $company, Request $request
      * @return User
      */
@@ -296,6 +332,7 @@ class CommonController extends Controller
 
         return $access;
     }
+
 
     /**
      * Set Updated Object
@@ -414,6 +451,39 @@ class CommonController extends Controller
         return FOSView::create(
             ['message' => 'Folder not found'],
             Response::HTTP_NOT_FOUND
+        );
+    }
+
+    /**
+     * Doc not found
+     */
+    protected function docNotFound()
+    {
+        return FOSView::create(
+            ['message' => 'Document not found'],
+            Response::HTTP_NOT_FOUND
+        );
+    }
+
+    /**
+     * Doc extention not permited
+     */
+    protected function unauthorizedExtention()
+    {
+        return FOSView::create(
+            ['message' => 'Extension not permited'],
+            Response::HTTP_UNAUTHORIZED
+        );
+    }
+
+    /**
+     * Year format not permited
+     */
+    protected function unauthorizedDate()
+    {
+        return FOSView::create(
+            ['message' => 'Date format is not valid :: expected YYYY'],
+            Response::HTTP_UNAUTHORIZED
         );
     }
 }
