@@ -2,15 +2,15 @@
 
 namespace AppBundle\Controller;
 
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use AppBundle\Form\Type\CompanyTypeForm;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View as FOSView;
 use AppBundle\Document\CompanyType;
 
-class CompanyTypeController extends Controller
+class CompanyTypeController extends CommonController
 {
     /**
      *
@@ -20,7 +20,7 @@ class CompanyTypeController extends Controller
      */
     public function getCompanyTypesAction(Request $request)
     {
-        $companyTypes = $this->get('doctrine.odm.mongodb.document_manager')
+        $companyTypes = $this->getDoctrineManager()
             ->getRepository('AppBundle:CompanyType')
             ->findAll();
 
@@ -35,7 +35,7 @@ class CompanyTypeController extends Controller
      */
     public function getCompanyTypeAction(Request $request)
     {
-        $companyType = $this->get('doctrine.odm.mongodb.document_manager')
+        $companyType = $this->getDoctrineManager()
             ->getRepository('AppBundle:CompanyType')
             ->find($request->get('companyType_id'));
 
@@ -52,7 +52,7 @@ class CompanyTypeController extends Controller
     /**
      *
      *
-     * @Rest\View(serializerGroups={"companyType"})
+     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"companyType"})
      * @Rest\Post("companyTypes")
      */
     public function postCompanyTypeAction(Request $request)
@@ -77,7 +77,7 @@ class CompanyTypeController extends Controller
     /**
      *
      *
-     * @Rest\View(serializerGroups={"companyType"})
+     * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"companyType"})
      * @Rest\Patch("companyTypes/{companyType_id}")
      */
     public function patchCompanyTypeAction(Request $request)
@@ -116,17 +116,14 @@ class CompanyTypeController extends Controller
      */
     public function deleteCompanyTypeAction(Request $request)
     {
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        die('deleteCompanyTypeAction');
+        $dm = $this->getDoctrineManager();
 
-        $companyType = $this->get('doctrine.odm.mongodb.document_manager')
-            ->getRepository('AppBundle:CompanyType')
+        $companyType = $this->dm->getRepository('AppBundle:CompanyType')
             ->find($request->get('companyType_id'));
 
         if (empty($companyType)) {
-            return FOSView::create(
-                ['message' => ' Company Type not found'],
-                Response::HTTP_NOT_FOUND
-            );
+            return $this->companyTypeNotFound();
         }
 
         $dm->remove($companyType);

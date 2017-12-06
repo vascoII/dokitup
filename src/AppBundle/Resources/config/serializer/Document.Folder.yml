@@ -2,11 +2,11 @@ AppBundle\Document\Folder:
     exclusion_policy: none
     properties:
         id:
-            groups: ['folders', 'folder', 'postFolder']
+            groups: ['folders', 'folder', 'postFolder', 'company']
         name:
-            groups: ['folders', 'folder', 'postFolder', 'postDoc', 'docs', 'doc']
+            groups: ['folders', 'folder', 'postFolder', 'postDoc', 'docs', 'doc', 'company']
         accesses:
-            groups: ['folder', 'postFolder', 'docs', 'doc']
+            groups: ['folders', 'folder', 'postFolder', 'docs', 'doc']
         companies:
             groups: ['postFolder', 'postDoc']
         docs:
@@ -16,6 +16,6 @@ AppBundle\Document\Folder:
         createdAt:
             groups: ['folder', 'postFolder']
         updatedBy:
-            groups: ['folders', 'folder']
+            groups: ['folder']
         updatedAt:
-            groups: ['folders', 'folder']
+            groups: ['folder']

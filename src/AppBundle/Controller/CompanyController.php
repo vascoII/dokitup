@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use AppBundle\Document\CompanyType;
 use AppBundle\Form\Type\CompanyForm;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +13,16 @@ use AppBundle\Document\Company;
 class CompanyController extends CommonController
 {
     /**
-     *
+     * @ApiDoc(
+     *    description="Company Document List based on User Token",
+     *    output= { "class"=Company::class, "collection"=true, "groups"={"companies"} },
+     *    statusCodes = {
+     *        200 = "Company Document List"
+     *    },
+     *    responseMap={
+     *         200 = {"class"=Company::class, "groups"={"companies"}}
+     *    }
+     * )
      *
      * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"companies"})
      * @Rest\Get("companies")
@@ -22,13 +32,26 @@ class CompanyController extends CommonController
         /**
          * SelfUser
          */
-        $selfUser = $this->getUserByToken($request);
+        $selfUser = $this->getDoctrineManager()
+            ->getRepository('AppBundle:AuthToken')
+            ->getUserByToken($request);
 
         return $selfUser->getCompanies();
     }
 
     /**
-     *
+     * @ApiDoc(
+     *    description="Company Document",
+     *    output= { "class"=Company::class, "collection"=false, "groups"={"company"} },
+     *    statusCodes = {
+     *        200 = "Company Document",
+     *        404 = "Company not found"
+     *    },
+     *    responseMap={
+     *         200 = {"class"=Company::class, "groups"={"company"}},
+     *         404 = {"class"=Company::class}
+     *    }
+     * )
      *
      * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"company"})
      * @Rest\Get("companies/{company_id}")
@@ -45,7 +68,16 @@ class CompanyController extends CommonController
     }
 
     /**
-     *
+     * @ApiDoc(
+     *    description="Create Company Document",
+     *    input={"class"=Company::class, "name"=""},
+     *    statusCodes = {
+     *        201 = "Company Document"
+     *    },
+     *    responseMap={
+     *         201 = {"class"=Company::class, "groups"={"postCompany"}}
+     *    }
+     * )
      *
      * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"postCompany"})
      * @Rest\Post("companies")
@@ -56,7 +88,9 @@ class CompanyController extends CommonController
         /**
          * CompanyType
          */
-        $companyType = $this->getCompanyType($request->request->get('companyType'));
+        $companyType = $this->getDoctrineManager()
+            ->getRepository('AppBundle:CompanyType')
+            ->getCompanyType($request->request->get('companyType'));
 
         if (!$companyType instanceof CompanyType) {
             return $this->companyTypeNotFound();
@@ -86,7 +120,18 @@ class CompanyController extends CommonController
     }
 
     /**
-     *
+     * @ApiDoc(
+     *    description="Update Company Document",
+     *    input={"class"=Company::class, "name"=""},
+     *    statusCodes = {
+     *        200 = "Company Document",
+     *        404 = "Company not found"
+     *    },
+     *    responseMap={
+     *         200 = {"class"=Company::class, "groups"={"company"}},
+     *         404 = {"class"=Company::class}
+     *    }
+     * )
      *
      * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"company"})
      * @Rest\Patch("companies/{company_id}")
@@ -106,7 +151,9 @@ class CompanyController extends CommonController
          * CompanyType
          */
         if (null !== $request->request->get('companyType')) {
-            $companyType = $this->getCompanyType($request->request->get('companyType'));
+            $companyType = $this->getDoctrineManager()
+                ->getRepository('AppBundle:CompanyType')
+                ->getCompanyType($request->request->get('companyType'));
 
             if (!$companyType instanceof CompanyType) {
                 return $this->companyTypeNotFound();
@@ -139,6 +186,7 @@ class CompanyController extends CommonController
      */
     public function deleteCompanyAction(Request $request)
     {
+        die('deleteCompanyAction');
         $dm = $this->getDoctrineManager();
         /**
          * Company

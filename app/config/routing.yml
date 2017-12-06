@@ -37,3 +37,7 @@ accessTypes:
 docs:
     type:     rest
     resource: AppBundle\Controller\DocController
+
+nelmio-api-doc:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /documentation

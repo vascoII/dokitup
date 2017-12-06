@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use AppBundle\Document\Company;
 use AppBundle\Document\Folder;
 use AppBundle\Document\Doc;
@@ -12,9 +13,6 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 
 class DocController extends CommonController
 {
-    const OWNER = 'owner';
-    const ACCOUNTANT = 'accountant';
-    const CRUD = 'CRUD';
     /**
      *
      *
@@ -107,12 +105,16 @@ class DocController extends CommonController
         /**
          * SelfUser
          */
-        $selfUser = $this->getUserByToken($request);
+        $selfUser = $this->getDoctrineManager()
+            ->getRepository('AppBundle:AuthToken')
+            ->getUserByToken($request);
         /**
          * Pour Dokitup v2 un user de userRole accountant ne peux pas uploader de doc
          */
-        if ($selfUser->getUserRole()->getName() === self::ACCOUNTANT)
-        {
+        if (
+            $selfUser->getUserRole()->getName() ===
+            $this->getParameter('accountant')
+        ) {
             return $this->userNotAllowed();
         }
         /**
@@ -265,8 +267,10 @@ class DocController extends CommonController
          */
         $access = $dm->getRepository('AppBundle:Access')
             ->findAccessByFolderCompany($folder, $company);
-        if ($access->getAccessType()->getName() == self::CRUD)
-        {
+        if (
+            $access->getAccessType()->getName() ===
+            $this->getParameter('crud')
+        ) {
             $dm->remove($doc);
             $dm->flush();
         } else {

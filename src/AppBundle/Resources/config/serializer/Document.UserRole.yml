@@ -6,7 +6,7 @@ AppBundle\Document\UserRole:
         name:
             groups: ['userRoles',
                 'users', 'user', 'postUser',
-                'company', 'companies',
+                'company',
                 'auth-token',
                 'adminUserCompany',
                 'self']

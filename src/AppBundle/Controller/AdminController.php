@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -12,28 +13,44 @@ use AppBundle\Document\UserRole;
 
 class AdminController extends CommonController
 {
-    const ADMIN = "admin";
     /**
-     *
+     * @ApiDoc(
+     *    description="Create Company and User for the ADMINAccessType Document List",
+     *    output= { "class"=AccessType::class, "collection"=true, "groups"={"accessType"} },
+     *    statusCodes = {
+     *        200 = "AccessType Document List"
+     *    },
+     *    responseMap={
+     *         200 = {"class"=AccessType::class, "groups"={"accessType"}}
+     *    }
+     * )
      *
      * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"adminUserCompany"})
      * @Rest\Post("adminUserCompany")
      */
     public function createUserCompanyAction(Request $request)
     {
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $dm = $this->getDoctrineManager();
 
         /**
          * Creator
          */
-        $creator = $this->getUserByToken($request);
-        if ($creator->getUserRole()->getName() !== self::ADMIN) {
+        $creator = $this->getDoctrineManager()
+            ->getRepository('AppBundle:AuthToken')
+            ->getUserByToken($request);
+
+        if (
+            $creator->getUserRole()->getName() !==
+            $this->getParameter('admin')
+        ) {
             return $this->userNotAllowed();
         }
         /**
          * CompanyType
          */
-        $companyType = $this->getCompanyType($request->get('companyType'));
+        $companyType = $this->getDoctrineManager()
+			->getRepository('AppBundle:CompanyType')
+			->getCompanyType($request->get('companyType'));
 
         if (!$companyType instanceof CompanyType) {
             return $companyType;
@@ -41,7 +58,10 @@ class AdminController extends CommonController
         /**
          * UserRole
          */
-        $userRole = $this->getUserRole($request->get('userRole'));
+        $userRole = $this->getDoctrineManager()
+            ->getRepository('AppBundle:UserRole')
+            ->getUserRole($request->get('userRole'));
+
         if (!$userRole instanceof UserRole) {
             return $userRole;
         }

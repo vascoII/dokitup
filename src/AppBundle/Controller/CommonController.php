@@ -3,122 +3,18 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Document\Access;
-use AppBundle\Document\AccessType;
 use AppBundle\Document\Company;
-use AppBundle\Document\CompanyType;
 use AppBundle\Document\Doc;
 use AppBundle\Document\Folder;
 use AppBundle\Document\User;
-use AppBundle\Document\UserRole;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use FOS\RestBundle\View\View as FOSView;
 
 class CommonController extends Controller
 {
     protected function getDoctrineManager()
     {
         return $this->get('doctrine.odm.mongodb.document_manager');
-    }
-
-    /**
-     * @param Request $request
-     * @return User
-     */
-    protected function getUserByToken(Request $request)
-    {
-        $authTokenHeader = $request->headers->get('X-Auth-Token');
-        $userByToken = $this->getDoctrineManager()
-            ->getRepository('AppBundle:AuthToken')
-            ->findOneByValue($authTokenHeader)
-            ->getUser();
-
-        return $userByToken;
-    }
-
-    /*
-     * @param string $companyTypeId
-     * @return CompanyType
-     */
-    protected function getCompanyType($companyTypeId)
-    {
-        $companyType = $this->getDoctrineManager()
-            ->getRepository('AppBundle:CompanyType')
-            ->find($companyTypeId);
-
-        if (!$companyType instanceof CompanyType) {
-            return false;
-        }
-        return $companyType;
-    }
-
-    /**
-     * @return Collection AccessType $accessTypes
-     */
-    protected function getAccessTypes()
-    {
-        $accessTypes = $this->getDoctrineManager()
-            ->getRepository('AppBundle:AccessType')
-            ->findAll();
-
-        return $accessTypes;
-    }
-
-    /**
-     * @return AccessType $accessType
-     */
-    protected function getAccessType($accessTypeId)
-    {
-        $accessType = $this->getDoctrineManager()
-            ->getRepository('AppBundle:AccessType')
-            ->find($accessTypeId);
-
-        return $accessType;
-    }
-
-    /**
-     * @return AccessType $accessType
-     */
-    protected function getAccessTypeByName($accessTypeName)
-    {
-        $accessType = $this->getDoctrineManager()
-            ->getRepository('AppBundle:AccessType')
-            ->findOneByName($accessTypeName);
-
-        return $accessType;
-    }
-
-    /*
-     * @param string $userRoleId
-     * @return UserRole
-     */
-    protected function getUserRole($userRoleId)
-    {
-        $userRole = $this->getDoctrineManager()
-            ->getRepository('AppBundle:UserRole')
-            ->find($userRoleId);
-
-        if (!$userRole instanceof UserRole) {
-            return false;
-        }
-        return $userRole;
-    }
-
-    /**
-     * @param string $companyId
-     * @return Company
-     */
-    protected function getCompany($companyId)
-    {
-        $company = $this->getDoctrineManager()
-            ->getRepository('AppBundle:Company')
-            ->find($companyId);
-
-        if (!$company instanceof Company) {
-            return false;
-        }
-        return $company;
     }
 
     /**
@@ -131,7 +27,10 @@ class CommonController extends Controller
         /*
          * User
          */
-        $user = $this->getUserByToken($request);
+        $user = $this->getDoctrineManager()
+            ->getRepository('AppBundle:AuthToken')
+            ->getUserByToken($request);
+
         /**
          * Company
          */
@@ -277,7 +176,10 @@ class CommonController extends Controller
          */
         $accessRights = ['owner' => 'CRUD', 'accountant' => 'RU'];
 
-        $user = $this->getUserByToken($request);
+        $user = $this->getDoctrineManager()
+            ->getRepository('AppBundle:AuthToken')
+            ->getUserByToken($request);
+
         $userRole = $user->getUserRole()->getName();
         /**
          * AccessType
@@ -286,7 +188,10 @@ class CommonController extends Controller
         {
             return false;
         }
-        $accessType = $this->getAccessTypeByName($accessRights[$userRole]);
+        $accessType = $this->getDoctrineManager()
+            ->getRepository('AppBundle:AccessType')
+            ->getAccessTypeByName($accessRights[$userRole]);
+
         /**
          * Access
          */
@@ -313,27 +218,6 @@ class CommonController extends Controller
 
     }
 
-    protected function getAccess($folder, $accessType)
-    {
-        $array = [
-            'accessType' => $accessType,
-            'folder' => $folder
-        ];
-        $access = $this->getDoctrineManager()
-            ->getRepository('AppBundle:Access')
-            ->findOneBy($array);
-        /**
-         * Access does not exist
-         */
-        if (!$access instanceof Access)
-        {
-            return false;
-        }
-
-        return $access;
-    }
-
-
     /**
      * Set Updated Object
      * @var Object, Request $request
@@ -341,7 +225,9 @@ class CommonController extends Controller
      */
     protected function setUpdated($object, $request)
     {
-        $userByToken = $this->getUserByToken($request);
+        $userByToken = $this->getDoctrineManager()
+            ->getRepository('AppBundle:AuthToken')
+            ->getUserByToken($request);
 
         $object->setUpdatedAt(new \DateTime());
         $object->setUpdatedBy($userByToken);
@@ -356,7 +242,9 @@ class CommonController extends Controller
      */
     protected function setUpdatedDoc($document, $request)
     {
-        $userByToken = $this->getUserByToken($request);
+        $userByToken = $this->getDoctrineManager()
+            ->getRepository('AppBundle:AuthToken')
+            ->getUserByToken($request);
 
         switch ($userByToken->getUserRole()->getName()) {
             case 'owner':
@@ -383,7 +271,9 @@ class CommonController extends Controller
      */
     protected function setCreated($object, $request)
     {
-        $userByToken = $this->getUserByToken($request);
+        $userByToken = $this->getDoctrineManager()
+            ->getRepository('AppBundle:AuthToken')
+            ->getUserByToken($request);
 
         $object->setCreatedBy($userByToken);
 
@@ -398,9 +288,8 @@ class CommonController extends Controller
      */
     protected function userNotAllowed()
     {
-        return FOSView::create(
-            ['message' => 'User not allowed'],
-            Response::HTTP_FORBIDDEN
+        throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException(
+            'User not allowed'
         );
     }
 
@@ -409,9 +298,8 @@ class CommonController extends Controller
      */
     protected function userNotFound()
     {
-        return FOSView::create(
-            ['message' => 'User not found'],
-            Response::HTTP_NOT_FOUND
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException(
+            'User not found'
         );
     }
 
@@ -420,9 +308,8 @@ class CommonController extends Controller
      */
     protected function userRoleNotFound()
     {
-        return FOSView::create(
-            ['message' => 'UserRole not found'],
-            Response::HTTP_NOT_FOUND
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException(
+            'UserRole not found'
         );
     }
 
@@ -431,9 +318,8 @@ class CommonController extends Controller
      */
     protected function companyNotFound()
     {
-        return FOSView::create(
-            ['message' => 'Company not found'],
-            Response::HTTP_NOT_FOUND
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException(
+            'Company not found'
         );
     }
 
@@ -442,9 +328,8 @@ class CommonController extends Controller
      */
     protected function companyTypeNotFound()
     {
-        return FOSView::create(
-            ['message' => 'CompanyType not found'],
-            Response::HTTP_NOT_FOUND
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException(
+            'CompanyType not found'
         );
     }
 
@@ -453,9 +338,8 @@ class CommonController extends Controller
      */
     protected function accessTypeNotFound()
     {
-        return FOSView::create(
-            ['message' => 'AccessType not found'],
-            Response::HTTP_NOT_FOUND
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException(
+            'AccessType not found'
         );
     }
 
@@ -464,9 +348,8 @@ class CommonController extends Controller
      */
     protected function accessNotFound()
     {
-        return FOSView::create(
-            ['message' => 'Access not found'],
-            Response::HTTP_NOT_FOUND
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException(
+            'Access not found'
         );
     }
 
@@ -475,9 +358,8 @@ class CommonController extends Controller
      */
     protected function folderNotFound()
     {
-        return FOSView::create(
-            ['message' => 'Folder not found'],
-            Response::HTTP_NOT_FOUND
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException(
+            'Folder not found'
         );
     }
 
@@ -486,9 +368,8 @@ class CommonController extends Controller
      */
     protected function docNotFound()
     {
-        return FOSView::create(
-            ['message' => 'Document not found'],
-            Response::HTTP_NOT_FOUND
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException(
+            'Document not found'
         );
     }
 
@@ -497,9 +378,8 @@ class CommonController extends Controller
      */
     protected function unauthorizedExtention()
     {
-        return FOSView::create(
-            ['message' => 'Extension not permited'],
-            Response::HTTP_UNAUTHORIZED
+        throw new \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException(
+            'Extension not permited'
         );
     }
 
@@ -508,9 +388,18 @@ class CommonController extends Controller
      */
     protected function unauthorizedDate()
     {
-        return FOSView::create(
-            ['message' => 'Date format is not valid :: expected YYYY'],
-            Response::HTTP_UNAUTHORIZED
+        throw new \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException(
+            '', 'Date format is not valid :: expected YYYY'
+        );
+    }
+
+    /**
+     * Year format not permited
+     */
+    protected function invalidCredentials()
+    {
+        throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException(
+            'Invalid credentials'
         );
     }
 }

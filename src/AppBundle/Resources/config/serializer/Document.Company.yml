@@ -26,10 +26,10 @@ AppBundle\Document\Company:
         folders:
             groups: ['company']
         createdBy:
-            groups: ['companies', 'company', 'postCompany']
+            groups: ['company', 'postCompany']
         createdAt:
-            groups: ['companies', 'company', 'postCompany']
+            groups: ['company', 'postCompany']
         updatedBy:
-            groups: ['companies', 'company']
+            groups: ['company']
         updatedAt:
-            groups: ['companies', 'company']
+            groups: ['company']

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use AppBundle\Document\UserRole;
 use AppBundle\Form\Type\UserForm;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +21,7 @@ class SelfUserController extends CommonController
         /**
          * SelfUser
          */
-        $selfUser = $this->getUserByToken($request);
+        $selfUser = $this->getDoctrineManager()->getRepository('AppBundle:AuthToken')->getUserByToken($request);
         return $selfUser;
     }
 
@@ -37,14 +38,16 @@ class SelfUserController extends CommonController
         /**
          * SelfUser
          */
-        $selfUser = $this->getUserByToken($request);
+        $selfUser = $this->getDoctrineManager()->getRepository('AppBundle:AuthToken')->getUserByToken($request);
 
         /**
          * Patch userRole
          */
         if (null !== $request->request->get('userRole'))
         {
-            $userRole = $this->getUserRole($request->request->get('userRole'));
+            $userRole = $this->getDoctrineManager()
+                ->getRepository('AppBundle:UserRole')
+                ->getUserRole($request->request->get('userRole'));
             if (!$userRole instanceof UserRole) {
                 return $this->userRoleNotFound();
             }

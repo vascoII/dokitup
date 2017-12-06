@@ -5,7 +5,7 @@ AppBundle\Document\AccessType:
             groups: ['accessType']
         name:
             groups: ['accessType',
-                'folder', 'postFolder',
+                'folders', 'folder', 'postFolder',
                 'docs', 'doc']
         createdBy:
             groups: ['accessType']

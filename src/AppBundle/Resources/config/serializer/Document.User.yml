@@ -3,7 +3,7 @@ AppBundle\Document\User:
     properties:
         id:
             groups: ['users', 'user', 'postUser',
-                'companies', 'company',
+                'company',
                 'auth-token',
                 'adminUserCompany',
                 'self',
@@ -11,7 +11,7 @@ AppBundle\Document\User:
                 'postFolder']
         firstName:
             groups: ['users', 'user', 'postUser',
-                'companies', 'company',
+                'company',
                 'auth-token',
                 'adminUserCompany',
                 'self',
@@ -20,7 +20,7 @@ AppBundle\Document\User:
                 'postDoc', 'doc']
         lastName:
             groups: ['users', 'user', 'postUser',
-                'companies', 'company',
+                'company',
                 'auth-token',
                 'adminUserCompany',
                 'self',
@@ -29,7 +29,7 @@ AppBundle\Document\User:
                 'postDoc', 'doc']
         email:
             groups: ['users', 'user', 'postUser',
-                'companies', 'company',
+                'company',
                 'auth-token',
                 'adminUserCompany',
                 'self',
@@ -39,7 +39,7 @@ AppBundle\Document\User:
             groups: ['postUser', 'adminUserCompany']
         userRole:
             groups: ['users', 'user', 'postUser',
-                'companies', 'company',
+                'company',
                 'auth-token',
                 'adminUserCompany',
                 'self',

@@ -4,6 +4,10 @@ parameters:
     uploaded_dir: "%kernel.root_dir%/.."
     uploaded_files: "/web/files/"
     uploaded_files_extension: [pdf]
+    admin: 'admin'
+    owner: 'owner'
+    accountant: 'accountant'
+    crud: 'CRUD'
 
 services:
     # default configuration for services in *this* file

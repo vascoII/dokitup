@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use AppBundle\Document\Company;
 use AppBundle\Form\Type\UserForm;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,7 +82,7 @@ class UserController extends CommonController
         /**
          * UserRole
          */
-        $userRole = $this->getUserRole($request->request->get('userRole'));
+        $userRole = $this->getDoctrineManager()->getRepository('AppBundle:UserRole')->getUserRole($request->request->get('userRole'));
 
         if (empty($userRole)) {
             return $this->userRoleNotFound();
@@ -148,7 +149,9 @@ class UserController extends CommonController
          * UserRole
          */
         if (null !== $request->request->get('userRole')) {
-            $userRole = $this->getUserRole($request->request->get('userRole'));
+            $userRole = $this->getDoctrineManager()
+                ->getRepository('AppBundle:UserRole')
+                ->getUserRole($request->request->get('userRole'));
 
             if (empty($userRole)) {
                 return $this->userRoleNotFound();

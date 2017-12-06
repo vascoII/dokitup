@@ -20,4 +20,24 @@ class AccessRepository extends DocumentRepository
 
         return $access;
     }
+
+    protected function getAccess($folder, $accessType)
+    {
+        $array = [
+            'accessType' => $accessType,
+            'folder' => $folder
+        ];
+        $access = $this->getDoctrineManager()
+            ->getRepository('AppBundle:Access')
+            ->findOneBy($array);
+        /**
+         * Access does not exist
+         */
+        if (!$access instanceof Access)
+        {
+            return false;
+        }
+
+        return $access;
+    }
 }

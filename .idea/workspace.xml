@@ -3,6 +3,36 @@
   <component name="ChangeListManager">
     <list default="true" id="8457a669-bb9b-40c1-882e-c194e0780a37" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/app/AppKernel.php" afterPath="$PROJECT_DIR$/app/AppKernel.php" />
+      <change beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
+      <change beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
+      <change beforePath="$PROJECT_DIR$/app/config/security.yml" afterPath="$PROJECT_DIR$/app/config/security.yml" />
+      <change beforePath="$PROJECT_DIR$/app/config/services.yml" afterPath="$PROJECT_DIR$/app/config/services.yml" />
+      <change beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/AccessTypeController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/AccessTypeController.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/AuthTokenController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/AuthTokenController.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CommonController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CommonController.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CompanyController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CompanyController.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CompanyTypeController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CompanyTypeController.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/DocController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/DocController.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/FolderController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/FolderController.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/SelfUserController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/SelfUserController.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/UserController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/UserController.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/UserRoleController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/UserRoleController.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/AccessRepository.php" afterPath="$PROJECT_DIR$/src/AppBundle/Repository/AccessRepository.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/AccessTypeRepository.php" afterPath="$PROJECT_DIR$/src/AppBundle/Repository/AccessTypeRepository.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/AuthTokenRepository.php" afterPath="$PROJECT_DIR$/src/AppBundle/Repository/AuthTokenRepository.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/CompanyRepository.php" afterPath="$PROJECT_DIR$/src/AppBundle/Repository/CompanyRepository.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/CompanyTypeRepository.php" afterPath="$PROJECT_DIR$/src/AppBundle/Repository/CompanyTypeRepository.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/UserRoleRepository.php" afterPath="$PROJECT_DIR$/src/AppBundle/Repository/UserRoleRepository.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Access.yml" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Access.yml" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.AccessType.yml" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.AccessType.yml" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Company.yml" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Company.yml" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Folder.yml" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Folder.yml" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.User.yml" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.User.yml" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.UserRole.yml" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.UserRole.yml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,10 +49,31 @@
       <find>AppBundle\Document\</find>
       <find>User</find>
       <find>getFolderByCompany</find>
+      <find>getUserByToken</find>
+      <find>getCompanyType</find>
+      <find>getAccessType</find>
+      <find>getAccessTypeByName</find>
+      <find>getUserRole</find>
+      <find>getCompany</find>
+      <find>getAccess</find>
+      <find>const</find>
+      <find>self</find>
+      <find>OWNER</find>
+      <find>userNotAllowed</find>
     </findStrings>
     <replaceStrings>
       <replace>Folder</replace>
+      <replace />
+      <replace>getDoctrineManager()-&gt;getRepository('AppBundle:AuthToken')-&gt;getUserByToken</replace>
+      <replace>getDoctrineManager()-&gt;getRepository('AppBundle:AccessType')-&gt;getAccessTypeByName</replace>
+      <replace>getDoctrineManager()-&gt;getRepository('AppBundle:UserRole')-&gt;getUserRole</replace>
+      <replace>getDoctrineManager()-&gt;getRepository('AppBundle:Company')-&gt;getCompany</replace>
+      <replace>getDoctrineManager()-&gt;getRepository('AppBundle:Access')-&gt;getAccess</replace>
     </replaceStrings>
+    <dirStrings>
+      <dir>C:\wamp\www\dokitup</dir>
+      <dir>C:\wamp\www\dokitup\src\AppBundle\Controller</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -30,57 +81,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.AuthToken.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Document/AuthToken.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/CompanyTypeController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/AuthTokenController.php" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
-        <option value="$PROJECT_DIR$/app/config/parameters.yml.dist" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Security/AuthTokenUserProvider.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Security/AuthTokenAuthenticator.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Repository/AdminRepository.php" />
-        <option value="$PROJECT_DIR$/app/config/security.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.UserRole.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/SelfUserController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/UserController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/Type/FolderForm.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/FolderTypeController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/Type/FolderTypeForm.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/AccessTypeController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/CompanyController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Repository/CommonRepository.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Repository/DocumentRepository.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Document/Company.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.CompanyType.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/FolderController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Document/Document.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/Type/DocumentForm.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/Type/DocForm.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Repository/FolderRepository.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Repository/UserRepository.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Repository/UserRoleRepository.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Repository/DocRepository.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Repository/CompanyTypeRepository.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Repository/AuthTokenRepository.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Repository/CompanyRepository.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Repository/AccessTypeRepository.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Document/Folder.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/DocumentController.php" />
-        <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Document/Doc.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Document/Access.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Doc.yml" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Repository/AuthTokenRepository.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Repository/CompanyTypeRepository.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Repository/AccessTypeRepository.php" />
+        <option value="$PROJECT_DIR$/var/logs/dev.log" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Repository/UserRoleRepository.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Repository/CompanyRepository.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Repository/AccessRepository.php" />
         <option value="$PROJECT_DIR$/app/config/services.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Company.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Document/Access.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.User.yml" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.UserRole.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Folder.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Access.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.AccessType.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Doc.yml" />
+        <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/app/AppKernel.php" />
+        <option value="$PROJECT_DIR$/app/config/routing.yml" />
+        <option value="$PROJECT_DIR$/app/config/security.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/CommonController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Repository/AccessRepository.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/AccessTypeController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/AuthTokenController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/DocController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/CompanyTypeController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/CompanyController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/UserRoleController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/UserController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/SelfUserController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/FolderController.php" />
       </list>
     </option>
   </component>
@@ -95,7 +146,7 @@
       <path value="C:\wamp\www\dokitup\src\AppBundle\Repository" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1004" />
@@ -129,6 +180,17 @@
             <path>
               <item name="dokitup" type="b2602c69:ProjectViewProjectNode" />
               <item name="dokitup" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="dokitup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dokitup" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="dokitup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dokitup" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -150,44 +212,6 @@
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Document" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="dokitup" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dokitup" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Repository" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="dokitup" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dokitup" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="dokitup" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dokitup" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="dokitup" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dokitup" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="serializer" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="dokitup" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dokitup" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Security" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -256,7 +280,7 @@
       <workItem from="1512065127535" duration="75177000" />
       <workItem from="1512311053133" duration="922000" />
       <workItem from="1512316680306" duration="17543000" />
-      <workItem from="1512427398441" duration="22118000" />
+      <workItem from="1512427398441" duration="38175000" />
     </task>
     <task id="LOCAL-00001" summary="Document and Repository Added">
       <created>1512002159004</created>
@@ -321,19 +345,26 @@
       <option name="project" value="LOCAL" />
       <updated>1512450229144</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Add Doc Controller :: CRUD =&gt; Done">
+      <created>1512450248656</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1512450248656</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124847000" />
+    <option name="totallyTimeSpent" value="140904000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1040" height="784" extended-state="6" />
+    <frame x="-8" y="-8" width="1040" height="784" extended-state="7" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988167" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988167" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -367,94 +398,14 @@
     <MESSAGE value="Add Folder Controller :: CRUD folder and addCompanyAccess, removeCompanyAccess" />
     <MESSAGE value="Add Doc Controller :: read List, read Document, create Document =&gt; Done" />
     <MESSAGE value="Add Doc Controller :: CRUD =&gt; Done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Doc Controller :: CRUD =&gt; Done" />
+    <MESSAGE value="Factoring Services and Add ApiDoc Bundle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Factoring Services and Add ApiDoc Bundle" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/AdminRepository.php" />
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Security/AuthTokenAuthenticator.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="69" column="39" lean-forward="false" selection-start-line="69" selection-start-column="39" selection-end-line="69" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Security/AuthTokenUserProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="25" column="41" lean-forward="false" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Encoder/UserPasswordEncoder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="32" column="20" lean-forward="false" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml.dist">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="21" lean-forward="false" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/Type/UserForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-427">
-          <caret line="29" column="46" lean-forward="false" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
-          <folding>
-            <element signature="e#40#85#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/Type/FolderForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="19" column="54" lean-forward="false" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/Type/AccessTypeForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AccessTypeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="67" column="4" lean-forward="false" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
-          <folding>
-            <element signature="e#40#79#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.UserRole.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/CommonRepository.php" />
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Document/AccessType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2">
@@ -491,14 +442,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Document/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="92" column="27" lean-forward="true" selection-start-line="92" selection-start-column="27" selection-end-line="92" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -553,82 +496,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/UserRoleRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="43" lean-forward="false" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/CompanyTypeRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="54" lean-forward="false" selection-start-line="9" selection-start-column="54" selection-end-line="9" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/AuthTokenRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="52" lean-forward="false" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/CompanyRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="43" lean-forward="false" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/AccessTypeRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="53" lean-forward="false" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/DocRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="46" lean-forward="false" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Document/Folder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="515">
           <caret line="194" column="25" lean-forward="false" selection-start-line="194" selection-start-column="25" selection-end-line="194" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="36" column="4" lean-forward="false" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/FolderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="73" column="8" lean-forward="false" selection-start-line="73" selection-start-column="8" selection-end-line="73" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/CompanyController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="24" column="52" lean-forward="false" selection-start-line="21" selection-start-column="8" selection-end-line="24" selection-end-column="52" />
           <folding />
         </state>
       </provider>
@@ -641,74 +512,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="26" lean-forward="false" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Company.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Document/Access.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="9" column="61" lean-forward="false" selection-start-line="9" selection-start-column="61" selection-end-line="9" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/SelfUserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="22" column="34" lean-forward="false" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Access.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="58" lean-forward="false" selection-start-line="6" selection-start-column="58" selection-end-line="6" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.AccessType.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="29" lean-forward="false" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Folder.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="80" lean-forward="false" selection-start-line="6" selection-start-column="80" selection-end-line="6" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.User.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="36" column="32" lean-forward="false" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -729,49 +536,300 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/UserRoleController.php">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/DocRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-854">
-          <caret line="46" column="9" lean-forward="true" selection-start-line="37" selection-start-column="8" selection-end-line="46" selection-end-column="9" />
+        <state relative-caret-position="170">
+          <caret line="10" column="46" lean-forward="false" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/UserController.php">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/AuthTokenRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="190" column="18" lean-forward="false" selection-start-line="190" selection-start-column="18" selection-end-line="190" selection-end-column="54" />
+        <state relative-caret-position="272">
+          <caret line="17" column="34" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/DocController.php">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/CompanyTypeRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="260" column="43" lean-forward="true" selection-start-line="260" selection-start-column="43" selection-end-line="260" selection-end-column="43" />
+        <state relative-caret-position="255">
+          <caret line="15" column="37" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="37" />
           <folding>
-            <element signature="e#40#71#0#PHP" expanded="true" />
-            <element signature="e#1192#1210#1#PHP" expanded="true" />
-            <element signature="e#5874#5892#1#PHP" expanded="true" />
-            <element signature="e#7260#7278#1#PHP" expanded="true" />
+            <element signature="e#364#387#1#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/var/logs/dev.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/AccessTypeRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="36" column="23" lean-forward="false" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
+          <folding>
+            <element signature="e#336#358#1#PHP" expanded="false" />
+            <element signature="e#581#603#1#PHP" expanded="false" />
+            <element signature="e#843#865#1#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/var/cache/dev/doctrine/odm/mongodb/Proxies/__CG__AppBundleDocumentUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="314" column="20" lean-forward="false" selection-start-line="314" selection-start-column="20" selection-end-line="314" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainerUrlMatcher.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="488" column="174" lean-forward="false" selection-start-line="488" selection-start-column="174" selection-end-line="488" selection-end-column="174" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainerUrlGenerator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="57" column="157" lean-forward="false" selection-start-line="57" selection-start-column="157" selection-end-line="57" selection-end-column="157" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainerCompiler.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="138" column="183" lean-forward="false" selection-start-line="138" selection-start-column="183" selection-end-line="138" selection-end-column="183" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Document/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="233" column="20" lean-forward="false" selection-start-line="233" selection-start-column="20" selection-end-line="233" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/UserRoleRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/CompanyRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="33" />
+          <folding>
+            <element signature="e#337#356#1#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/AccessRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="22" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+        <state relative-caret-position="62">
+          <caret line="23" column="32" lean-forward="false" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="14" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.User.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-23">
+          <caret line="41" column="16" lean-forward="false" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Company.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="34" column="21" lean-forward="false" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.UserRole.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="16" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Access.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="42" lean-forward="false" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.AccessType.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="27" lean-forward="false" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/serializer/Document.Folder.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="32" lean-forward="false" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="96" column="73" lean-forward="false" selection-start-line="96" selection-start-column="73" selection-end-line="96" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="574">
+          <caret line="42" column="28" lean-forward="false" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="20" column="57" lean-forward="false" selection-start-line="20" selection-start-column="57" selection-end-line="20" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="36" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/CommonController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="370" column="22" lean-forward="false" selection-start-line="370" selection-start-column="22" selection-end-line="370" selection-end-column="22" />
+        <state relative-caret-position="250">
+          <caret line="320" column="58" lean-forward="false" selection-start-line="320" selection-start-column="58" selection-end-line="320" selection-end-column="79" />
           <folding>
-            <element signature="e#5128#5143#1#PHP" expanded="true" />
+            <element signature="e#40#70#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="4" column="42" lean-forward="false" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AuthTokenController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="42" lean-forward="false" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/CompanyTypeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="42" lean-forward="false" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AccessTypeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="42" />
+          <folding>
+            <element signature="e#40#82#0#PHP" expanded="false" />
+            <element signature="e#971#993#1#PHP" expanded="false" />
+            <element signature="e#1777#1799#1#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/CompanyController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding>
+            <element signature="e#40#82#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/UserRoleController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="42" lean-forward="false" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="42" lean-forward="false" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/SelfUserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="42" lean-forward="false" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/DocController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="42" lean-forward="false" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/FolderController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="261" column="38" lean-forward="false" selection-start-line="261" selection-start-column="38" selection-end-line="261" selection-end-column="38" />
+          <folding>
+            <element signature="e#40#82#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>

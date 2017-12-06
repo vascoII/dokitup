@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use AppBundle\Document\Access;
 use AppBundle\Document\AccessType;
 use AppBundle\Document\Company;
@@ -21,6 +22,7 @@ class FolderController extends CommonController
      */
     public function getFoldersAction(Request $request)
     {
+        $dm = $this->getDoctrineManager();
         /**
          * Company
          */
@@ -30,8 +32,22 @@ class FolderController extends CommonController
             return $this->companyNotFound();
         }
 
-        $folders = $company->getFolders();
-        return $folders;
+        $folderContainer = [];
+        foreach ($company->getFolders() as $companyfolder)
+        {
+            /**
+             * Access to Folder from Company
+             */
+            $access = $dm->getRepository('AppBundle:Access')
+                ->findAccessByFolderCompany($companyfolder, $company);
+
+
+            $companyfolder->getAccesses()->clear();
+            $companyfolder->getAccesses()->add($access);
+            $folderContainer = $companyfolder;
+        }
+
+        return $folderContainer;
     }
 
     /**
@@ -197,7 +213,7 @@ class FolderController extends CommonController
         /**
          * CompanyAdded
          */
-        $companyAdded = $this->getCompany($request->get('addCompany_id'));
+        $companyAdded = $this->getDoctrineManager()->getRepository('AppBundle:Company')->getCompany($request->get('addCompany_id'));
         if (!$companyAdded instanceof Company) {
             return $this->companyNotFound();
         }
@@ -243,7 +259,7 @@ class FolderController extends CommonController
      * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"folder"})
      * @Rest\Delete("companies/{company_id}/folders/{folder_id}/removeCompanyAccess/{removeCompany_id}")
      */
-    public function removeFolderFromCompanyAction(Request $request)
+    public function removeFolderAccessFromCompanyAction(Request $request)
     {
         $dm = $this->getDoctrineManager();
         /**
@@ -272,7 +288,10 @@ class FolderController extends CommonController
         /**
          * CompanyRemouved
          */
-        $companyRemouved = $this->getCompany($request->get('removeCompany_id'));
+        $companyRemouved = $this->getDoctrineManager()
+            ->getRepository('AppBundle:Company')
+            ->getCompany($request->get('removeCompany_id'));
+
         if (!$companyRemouved instanceof Company) {
             return $this->companyNotFound();
         }
